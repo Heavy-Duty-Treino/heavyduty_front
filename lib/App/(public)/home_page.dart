@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heavyduty_front/App/pages/base_screem.dart';
+import 'package:heavyduty_front/App/components/base_screem.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
