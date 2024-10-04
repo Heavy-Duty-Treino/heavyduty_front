@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_concluido_model.dart';
 
