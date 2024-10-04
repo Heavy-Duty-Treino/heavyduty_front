@@ -20,8 +20,13 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Material(
-      child: Center(child: Text('Splash Page')),
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Splash Page',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
     );
   }
 }
