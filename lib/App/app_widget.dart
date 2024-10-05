@@ -8,6 +8,12 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFF1A1919),
+          textTheme: const TextTheme(
+              bodyLarge: TextStyle(color: Colors.white),
+              bodyMedium: TextStyle(color: Colors.white),
+              bodySmall: TextStyle(color: Colors.white))),
       title: 'Heavy App',
       routerConfig:
           Routefly.routerConfig(routes: routes, initialPath: routePaths.splash),

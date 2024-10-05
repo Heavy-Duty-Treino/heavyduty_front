@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heavyduty_front/App/components/base_screem.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,9 +11,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home Page')),
-      body: const Text('Texto body'),
+    return const BaseScreem(
+      title: 'Home Page',
+      body: Text('Texto body'),
     );
   }
 }
