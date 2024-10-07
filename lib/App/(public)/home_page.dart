@@ -17,7 +17,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return const BaseScreem(
         title: 'Home Page',
-        body: Column(children: [
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: EdgeInsets.only(left: 15),
+            child: Text('Sua Atividade'),
+          ),
           Row(
             children: [
               Expanded(
