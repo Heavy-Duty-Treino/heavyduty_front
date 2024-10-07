@@ -15,13 +15,14 @@ class BaseScreem extends StatefulWidget {
 class _BaseScreemState extends State<BaseScreem> {
   void _onTapNavigation(int index) {
     if (index == 0) Routefly.navigate(routePaths.home);
+    if (index == 1) Routefly.navigate(routePaths.treino);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(150),
+          preferredSize: const Size.fromHeight(140),
           child: Container(
             margin: const EdgeInsets.only(top: 90),
             child: Padding(
@@ -56,10 +57,21 @@ class _BaseScreemState extends State<BaseScreem> {
           )),
       body: widget.body,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        fixedColor: const Color.fromARGB(115, 255, 255, 255),
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.fit_screen_outlined), label: 'Treino')
+              icon: Icon(
+                Icons.home,
+                color: Color.fromARGB(255, 112, 112, 112),
+              ),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.fit_screen_outlined,
+                color: Color.fromARGB(255, 112, 112, 112),
+              ),
+              label: 'Treino')
         ],
         onTap: _onTapNavigation,
       ),

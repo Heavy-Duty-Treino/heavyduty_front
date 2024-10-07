@@ -4,6 +4,7 @@ import 'package:routefly/routefly.dart';
 
 import 'app/(public)/home_page.dart' as a0;
 import 'app/(public)/splash_page.dart' as a1;
+import 'app/(public)/treino_page.dart' as a2;
 
 List<RouteEntity> get routes => [
       RouteEntity(
@@ -24,10 +25,20 @@ List<RouteEntity> get routes => [
           const a1.SplashPage(),
         ),
       ),
+      RouteEntity(
+        key: '/treino',
+        uri: Uri.parse('/treino'),
+        routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
+          ctx,
+          settings,
+          const a2.TreinoPage(),
+        ),
+      ),
     ];
 
 const routePaths = (
   path: '/',
   home: '/home',
   splash: '/splash',
+  treino: '/treino',
 );
