@@ -11,7 +11,7 @@ class CardTreino extends StatefulWidget {
 class _CardTreinoState extends State<CardTreino> {
   @override
   Widget build(BuildContext context) {
-    return const Card(
+    return Card(
       color: Color.fromARGB(255, 43, 44, 46),
       child: SizedBox(
         height: 100,
@@ -28,7 +28,12 @@ class _CardTreinoState extends State<CardTreino> {
               children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: BaseButton(title: 'Iniciar', ph: 25, pv: 5),
+                  child: BaseButton(
+                    title: 'Iniciar',
+                    ph: 25,
+                    pv: 5,
+                    onPressed: () {},
+                  ),
                 )
               ],
             )

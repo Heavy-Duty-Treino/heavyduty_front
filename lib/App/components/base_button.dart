@@ -4,9 +4,14 @@ class BaseButton extends StatefulWidget {
   final String title;
   final double ph;
   final double pv;
+  final VoidCallback onPressed;
 
   const BaseButton(
-      {super.key, required this.title, required this.ph, required this.pv});
+      {super.key,
+      required this.title,
+      required this.ph,
+      required this.pv,
+      required this.onPressed});
 
   @override
   State<BaseButton> createState() => _BaseButtonState();
@@ -26,7 +31,7 @@ class _BaseButtonState extends State<BaseButton> {
           side: BorderSide(color: Colors.white, width: 0.1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)))),
-      onPressed: () {},
+      onPressed: widget.onPressed,
     );
   }
 }
