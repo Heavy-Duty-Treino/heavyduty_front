@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:heavyduty_front/App/components/base_button.dart';
 import 'package:heavyduty_front/App/components/base_screem.dart';
 import 'package:heavyduty_front/App/components/card_treino.dart';
+import 'package:heavyduty_front/routes.g.dart';
+import 'package:routefly/routefly.dart';
 
 class TreinoPage extends StatefulWidget {
   const TreinoPage({super.key});
@@ -22,14 +24,17 @@ class _TreinoPageState extends State<TreinoPage> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: const Text('Treinos'),
             ),
-            const Row(
+            Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 15, bottom: 20),
+                  padding: const EdgeInsets.only(left: 15, bottom: 20),
                   child: BaseButton(
                     title: 'Crie um treino',
                     ph: 35,
                     pv: 15,
+                    onPressed: () {
+                      Routefly.navigate(routePaths.criarTreino);
+                    },
                   ),
                 )
               ],

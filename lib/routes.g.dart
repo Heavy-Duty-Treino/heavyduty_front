@@ -2,18 +2,28 @@
 
 import 'package:routefly/routefly.dart';
 
-import 'app/(public)/home_page.dart' as a0;
-import 'app/(public)/splash_page.dart' as a1;
-import 'app/(public)/treino_page.dart' as a2;
+import 'app/(public)/criar_treino_page.dart' as a0;
+import 'app/(public)/home_page.dart' as a1;
+import 'app/(public)/splash_page.dart' as a2;
+import 'app/(public)/treino_page.dart' as a3;
 
 List<RouteEntity> get routes => [
+      RouteEntity(
+        key: '/criar_treino',
+        uri: Uri.parse('/criar_treino'),
+        routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
+          ctx,
+          settings,
+          const a0.CriarTreinoPage(),
+        ),
+      ),
       RouteEntity(
         key: '/home',
         uri: Uri.parse('/home'),
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a0.HomePage(),
+          const a1.HomePage(),
         ),
       ),
       RouteEntity(
@@ -22,7 +32,7 @@ List<RouteEntity> get routes => [
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a1.SplashPage(),
+          const a2.SplashPage(),
         ),
       ),
       RouteEntity(
@@ -31,13 +41,14 @@ List<RouteEntity> get routes => [
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a2.TreinoPage(),
+          const a3.TreinoPage(),
         ),
       ),
     ];
 
 const routePaths = (
   path: '/',
+  criarTreino: '/criar_treino',
   home: '/home',
   splash: '/splash',
   treino: '/treino',
