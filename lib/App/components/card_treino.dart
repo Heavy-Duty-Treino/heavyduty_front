@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:heavyduty_front/App/components/base_button.dart';
+import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
 class CardTreino extends StatefulWidget {
-  const CardTreino({super.key});
+  final String title;
+  final Treino treino;
+  const CardTreino({super.key, required this.title, required this.treino});
 
   @override
   State<CardTreino> createState() => _CardTreinoState();
@@ -21,7 +24,7 @@ class _CardTreinoState extends State<CardTreino> {
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Treino de costas'),
+              child: Text(widget.title),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -32,7 +35,9 @@ class _CardTreinoState extends State<CardTreino> {
                     title: 'Iniciar',
                     ph: 25,
                     pv: 5,
-                    onPressed: () {},
+                    onPressed: () {
+                      print(widget.treino);
+                    },
                   ),
                 )
               ],

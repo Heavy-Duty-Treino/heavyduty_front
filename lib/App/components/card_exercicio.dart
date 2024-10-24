@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:heavyduty_front/App/components/card_serie.dart';
+import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
+import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
 class CardExercicio extends StatefulWidget {
-  const CardExercicio({super.key});
+  final String title;
+  final bool showColum;
+  final String idExercicio;
+
+  const CardExercicio(
+      {super.key,
+      required this.title,
+      required this.showColum,
+      required this.idExercicio});
 
   @override
   State<CardExercicio> createState() => _CardExercicioState();
@@ -25,41 +36,18 @@ class _CardExercicioState extends State<CardExercicio> {
               ),
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('Remada Curvada'),
-              Text('data'),
+              Text(widget.title),
               Text('Tempo de descanso: 3 min')
             ])
           ]),
-          Column(
-            children: [
-              Table(
-                children: [
-                  TableRow(children: [
-                    Container(
-                      child: Text('Serie'),
-                    ),
-                    Container(
-                      child: Text('KG'),
-                    ),
-                    Container(
-                      child: Text('Repetições'),
-                    )
-                  ]),
-                  TableRow(children: [
-                    Container(
-                      child: Text('data'),
-                    ),
-                    Container(
-                      child: Text('data'),
-                    ),
-                    Container(
-                      child: Text('data'),
-                    ),
-                  ])
-                ],
-              )
-            ],
-          )
+          if (!widget.showColum)
+            Column(
+              children: [
+                CardSerie(
+                  idExercicio: widget.idExercicio,
+                )
+              ],
+            )
         ],
       ),
     );
