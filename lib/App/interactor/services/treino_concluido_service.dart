@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_concluido_model.dart';
 
 class TreinoConcluidoService {
-  final urlDefault = 'http://localhost:5126/api/treinosconcluidos';
+  final urlDefault = 'http://192.168.1.70:5126/api/treinosconcluidos';
   final dio = Dio();
 
   Future<List<TreinoConcluido>> getAll() async {
