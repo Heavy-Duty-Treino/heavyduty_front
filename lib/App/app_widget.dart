@@ -15,8 +15,10 @@ class AppWidget extends StatelessWidget {
               bodyMedium: TextStyle(color: Colors.white),
               bodySmall: TextStyle(color: Colors.white))),
       title: 'Heavy App',
-      routerConfig:
-          Routefly.routerConfig(routes: routes, initialPath: routePaths.splash),
+      routerConfig: Routefly.routerConfig(
+        routes: routes,
+        initialPath: routePaths.splash,
+      ),
     );
   }
 }
