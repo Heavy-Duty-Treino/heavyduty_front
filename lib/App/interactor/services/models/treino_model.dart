@@ -1,5 +1,5 @@
 class Treino {
-  String id;
+  String? id;
   String titulo;
   String nomeUsuario;
   String fotoPerfilUsuario;
@@ -27,7 +27,6 @@ class Treino {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'titulo': titulo,
       'nome_Usuario': nomeUsuario,
       'foto_Perfil_Usuario': fotoPerfilUsuario,
@@ -41,7 +40,7 @@ class Exercicio {
   String nomeExercicio;
   String tipoExercicio;
   String musculoAlvo;
-  List<String> musculosSinergistas;
+  List<dynamic> musculosSinergistas;
   String categoriaExercicio;
   List<Serie> series;
   int descansoSegundos;
