@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:heavyduty_front/App/components/base_button.dart';
 import 'package:heavyduty_front/App/components/base_screem.dart';
 import 'package:heavyduty_front/App/components/card_treino.dart';
+import 'package:heavyduty_front/App/interactor/controllers/exercicioController.dart';
+import 'package:heavyduty_front/App/interactor/controllers/treinoController.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
 
@@ -13,8 +16,11 @@ class TreinoPage extends StatefulWidget {
 }
 
 class _TreinoPageState extends State<TreinoPage> {
+  final Treinocontroller controller = Get.put(Treinocontroller());
+
   @override
   Widget build(BuildContext context) {
+    controller.GetAll();
     return BaseScreem(
         title: 'Treino',
         body: Column(
@@ -41,13 +47,22 @@ class _TreinoPageState extends State<TreinoPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15, bottom: 20),
-              child: const Text('Meu treinos (5)'),
+              child:
+                  Obx(() => Text('Meu treinos (${controller.treinos.length})')),
             ),
             Expanded(
-              child: ListView.builder(itemBuilder: (context, index) {
-                return ListTile(
-                  title: CardTreino(),
-                );
+              child: Obx(() {
+                return ListView.builder(
+                    itemCount: controller.treinos.length,
+                    itemBuilder: (context, index) {
+                      final treino = controller.treinos[index];
+                      return ListTile(
+                        title: CardTreino(
+                          treino: treino,
+                          title: treino.titulo,
+                        ),
+                      );
+                    });
               }),
             )
           ],
