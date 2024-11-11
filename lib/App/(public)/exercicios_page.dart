@@ -51,6 +51,7 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
                 child: CardExercicio(
                     title: exercicio.nome_exercicio,
                     showColum: true,
+                    isPageConcluir: false,
                     idExercicio: exercicio.id),
               );
             });

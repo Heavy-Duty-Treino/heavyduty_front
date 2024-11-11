@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:heavyduty_front/App/components/base_button.dart';
+import 'package:heavyduty_front/App/interactor/controllers/concoluirTreinoPageController.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
+import 'package:heavyduty_front/routes.g.dart';
+import 'package:routefly/routefly.dart';
 
 class CardTreino extends StatefulWidget {
   final String title;
@@ -12,6 +16,8 @@ class CardTreino extends StatefulWidget {
 }
 
 class _CardTreinoState extends State<CardTreino> {
+  final ConcoluirTreinoPageController _controller =
+      Get.put(ConcoluirTreinoPageController());
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,7 +42,8 @@ class _CardTreinoState extends State<CardTreino> {
                     ph: 25,
                     pv: 5,
                     onPressed: () {
-                      print(widget.treino);
+                      Routefly.navigate(routePaths.concluirTreino);
+                      _controller.setTreino(widget.treino);
                     },
                   ),
                 )

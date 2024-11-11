@@ -2,20 +2,30 @@
 
 import 'package:routefly/routefly.dart';
 
-import 'app/(public)/criar_treino_page.dart' as a0;
-import 'app/(public)/exercicios_page.dart' as a1;
-import 'app/(public)/home_page.dart' as a2;
-import 'app/(public)/splash_page.dart' as a3;
-import 'app/(public)/treino_page.dart' as a4;
+import 'app/(public)/concluir_treino_page.dart' as a0;
+import 'app/(public)/criar_treino_page.dart' as a1;
+import 'app/(public)/exercicios_page.dart' as a2;
+import 'app/(public)/home_page.dart' as a3;
+import 'app/(public)/splash_page.dart' as a4;
+import 'app/(public)/treino_page.dart' as a5;
 
 List<RouteEntity> get routes => [
+      RouteEntity(
+        key: '/concluir_treino',
+        uri: Uri.parse('/concluir_treino'),
+        routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
+          ctx,
+          settings,
+          const a0.ConcluirTreinoPage(),
+        ),
+      ),
       RouteEntity(
         key: '/criar_treino',
         uri: Uri.parse('/criar_treino'),
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a0.CriarTreinoPage(),
+          const a1.CriarTreinoPage(),
         ),
       ),
       RouteEntity(
@@ -24,7 +34,7 @@ List<RouteEntity> get routes => [
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a1.ExerciciosPage(),
+          const a2.ExerciciosPage(),
         ),
       ),
       RouteEntity(
@@ -33,7 +43,7 @@ List<RouteEntity> get routes => [
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a2.HomePage(),
+          const a3.HomePage(),
         ),
       ),
       RouteEntity(
@@ -42,19 +52,23 @@ List<RouteEntity> get routes => [
         routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
           ctx,
           settings,
-          const a3.SplashPage(),
+          const a4.SplashPage(),
         ),
       ),
       RouteEntity(
         key: '/treino',
         uri: Uri.parse('/treino'),
-        routeBuilder: (ctx, settings) =>
-            Routefly.defaultRouteBuilder(ctx, settings, const a4.TreinoPage()),
+        routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
+          ctx,
+          settings,
+          const a5.TreinoPage(),
+        ),
       ),
     ];
 
 const routePaths = (
   path: '/',
+  concluirTreino: '/concluir_treino',
   criarTreino: '/criar_treino',
   exercicios: '/exercicios',
   home: '/home',

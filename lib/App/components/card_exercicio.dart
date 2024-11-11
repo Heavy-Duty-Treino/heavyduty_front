@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:heavyduty_front/App/components/card_serie.dart';
+import 'package:heavyduty_front/App/components/card_serie_concluido.dart';
+import 'package:heavyduty_front/App/interactor/controllers/concoluirTreinoPageController.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
@@ -7,18 +10,23 @@ class CardExercicio extends StatefulWidget {
   final String title;
   final bool showColum;
   final String idExercicio;
+  final bool isPageConcluir;
 
   const CardExercicio(
       {super.key,
       required this.title,
       required this.showColum,
-      required this.idExercicio});
+      required this.idExercicio,
+      required this.isPageConcluir});
 
   @override
   State<CardExercicio> createState() => _CardExercicioState();
 }
 
 class _CardExercicioState extends State<CardExercicio> {
+  final ConcoluirTreinoPageController _controller =
+      Get.put(ConcoluirTreinoPageController());
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -43,9 +51,12 @@ class _CardExercicioState extends State<CardExercicio> {
           if (!widget.showColum)
             Column(
               children: [
-                CardSerie(
-                  idExercicio: widget.idExercicio,
-                )
+                if (widget.isPageConcluir)
+                  CardSerieConcluido(idExercicio: widget.idExercicio)
+                else
+                  CardSerie(
+                    idExercicio: widget.idExercicio,
+                  )
               ],
             )
         ],

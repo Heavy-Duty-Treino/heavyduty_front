@@ -100,6 +100,7 @@ class _CriarTreinoPageState extends State<CriarTreinoPage> {
                   return CardExercicio(
                     idExercicio: exercicio.exercicioId,
                     title: exercicio.nomeExercicio,
+                    isPageConcluir: false,
                     showColum: false,
                   );
                 },
