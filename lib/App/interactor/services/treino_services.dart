@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
 class TreinoServices {
-  final urlDefalult = 'http://192.168.1.70:5126/api/treino';
+  final urlDefalult = 'http://192.168.1.69:5126/api/treino';
   final dio = Dio();
 
   Future<List<Treino>> getAll() async {
