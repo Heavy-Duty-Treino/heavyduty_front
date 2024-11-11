@@ -15,8 +15,6 @@ class CardSerie extends StatefulWidget {
 
 class _CardSerieState extends State<CardSerie> {
   final Exerciciocontroller controller = Get.put(Exerciciocontroller());
-  late int textKg;
-  late int textReps;
 
   List<TableRow> series = [
     TableRow(children: [
@@ -103,7 +101,7 @@ class _CardSerieState extends State<CardSerie> {
                   },
                 ),
                 ListTile(
-                  leading: new Icon(Icons.satellite),
+                  leading: new Icon(Icons.delete),
                   title: new Text('Remover Série'),
                   onTap: () => {},
                 ),
