@@ -20,6 +20,7 @@ class Exerciciocontroller extends GetxController {
     selectedExercicios.addAll(model.map((exercicioModel) {
       return Exercicio(
           exercicioId: exercicioModel.id,
+          imageUrl: exercicioModel.image_Url,
           nomeExercicio: exercicioModel.nome_exercicio,
           tipoExercicio: exercicioModel.tipo_exercicio,
           musculoAlvo: exercicioModel.musculo_alvo,
