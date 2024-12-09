@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:heavyduty_front/App/components/base_button.dart';
-import 'package:heavyduty_front/App/components/base_screem.dart';
-import 'package:heavyduty_front/App/components/card_treino.dart';
+import 'package:heavyduty_front/App/components/shared/base_button.dart';
+import 'package:heavyduty_front/App/components/shared/base_screem.dart';
+import 'package:heavyduty_front/App/components/Treino/card_treino.dart';
 import 'package:heavyduty_front/App/interactor/controllers/exercicioController.dart';
 import 'package:heavyduty_front/App/interactor/controllers/treinoController.dart';
 import 'package:heavyduty_front/routes.g.dart';

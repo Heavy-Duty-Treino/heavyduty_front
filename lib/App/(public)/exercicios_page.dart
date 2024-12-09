@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:heavyduty_front/App/components/base_button.dart';
-import 'package:heavyduty_front/App/components/card_exercicio.dart';
+import 'package:heavyduty_front/App/components/shared/base_button.dart';
+import 'package:heavyduty_front/App/components/shared/card_exercicio.dart';
 import 'package:heavyduty_front/App/interactor/controllers/criarTreinoPageController.dart';
 import 'package:heavyduty_front/App/interactor/controllers/exercicioController.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
@@ -49,10 +49,12 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
                   exercicios.add(exercicio);
                 },
                 child: CardExercicio(
-                    title: exercicio.nome_exercicio,
-                    showColum: true,
-                    isPageConcluir: false,
-                    idExercicio: exercicio.id),
+                  title: exercicio.nome_exercicio,
+                  showColum: true,
+                  isPageConcluir: false,
+                  idExercicio: exercicio.id,
+                  image: exercicio.image_Url,
+                ),
               );
             });
       }),

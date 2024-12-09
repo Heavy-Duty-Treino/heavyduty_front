@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:heavyduty_front/App/components/base_button.dart';
-import 'package:heavyduty_front/App/components/card_exercicio.dart';
+import 'package:heavyduty_front/App/components/shared/base_button.dart';
+import 'package:heavyduty_front/App/components/shared/card_exercicio.dart';
 import 'package:heavyduty_front/App/interactor/controllers/concoluirTreinoPageController.dart';
-import 'package:heavyduty_front/App/interactor/services/models/treino_concluido_model.dart';
-import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
 
@@ -40,7 +37,7 @@ class _ConcluirTreinoPageState extends State<ConcluirTreinoPage> {
                     title: "Concluir",
                     ph: 10,
                     pv: 10,
-                    onPressed: () => {Routefly.navigate(routePaths.treino)}),
+                    onPressed: () => {_controller.concluir()}),
               ],
             ),
           )),
@@ -54,10 +51,12 @@ class _ConcluirTreinoPageState extends State<ConcluirTreinoPage> {
                     var exercicio = _controller.treino.value.exercicios[index];
                     _controller.setExercicio(exercicio.exercicioId);
                     return CardExercicio(
-                        title: exercicio.nomeExercicio,
-                        showColum: false,
-                        idExercicio: exercicio.exercicioId,
-                        isPageConcluir: true);
+                      title: exercicio.nomeExercicio,
+                      showColum: false,
+                      idExercicio: exercicio.exercicioId,
+                      isPageConcluir: true,
+                      image: exercicio.imageUrl,
+                    );
                   });
             },
           ))

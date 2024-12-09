@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:heavyduty_front/App/(public)/exercicios_page.dart';
-import 'package:heavyduty_front/App/components/base_button.dart';
-import 'package:heavyduty_front/App/components/base_screem.dart';
-import 'package:heavyduty_front/App/components/card_exercicio.dart';
+import 'package:heavyduty_front/App/components/shared/base_button.dart';
+import 'package:heavyduty_front/App/components/shared/card_exercicio.dart';
 import 'package:heavyduty_front/App/interactor/controllers/criarTreinoPageController.dart';
 import 'package:heavyduty_front/App/interactor/controllers/exercicioController.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
@@ -102,6 +100,7 @@ class _CriarTreinoPageState extends State<CriarTreinoPage> {
                     title: exercicio.nomeExercicio,
                     isPageConcluir: false,
                     showColum: false,
+                    image: exercicio.imageUrl,
                   );
                 },
               );
