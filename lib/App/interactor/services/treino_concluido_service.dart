@@ -12,4 +12,14 @@ class TreinoConcluidoService {
         data.map((json) => TreinoConcluido.fromJson(json)).toList();
     return treinosConcluidos;
   }
+
+  Future<Response<dynamic>> Create(TreinoConcluido model) async {
+    final response = await dio.post(urlDefault,
+        data: model.toJson(),
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+        }));
+
+    return response;
+  }
 }

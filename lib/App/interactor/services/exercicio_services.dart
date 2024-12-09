@@ -12,6 +12,7 @@ class ExercicioServices {
         .map((map) => ExercicioModel(
             id: map['id'],
             nome_exercicio: map['nome_Exercicio'],
+            image_Url: map['image_Url'],
             nome_usuario: map['nome_Usuario'],
             tipo_exercicio: map['tipo_Exercicio'],
             musculo_alvo: map['musculo_Alvo'],
