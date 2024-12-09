@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
+
 class TreinoConcluido {
-  String idTreino;
+  String? idTreino;
   String titulo;
   String nomeUsuario;
   String fotoPerfilUsuario;
@@ -35,84 +38,88 @@ class TreinoConcluido {
   }
 }
 
-class Exercicio {
-  String exercicioId;
-  String nomeExercicio;
-  String tipoExercicio;
-  String musculoAlvo;
-  List<String> musculosSinergistas;
-  String categoriaExercicio;
-  List<Serie> series;
-  int descansoSegundos;
+// class Exercicio {
+//   String exercicioId;
+//   String nomeExercicio;
+//   String image_Url;
+//   String tipoExercicio;
+//   String musculoAlvo;
+//   List<String> musculosSinergistas;
+//   String categoriaExercicio;
+//   List<SerieConcluido> series;
+//   int descansoSegundos;
 
-  Exercicio({
-    required this.exercicioId,
-    required this.nomeExercicio,
-    required this.tipoExercicio,
-    required this.musculoAlvo,
-    required this.musculosSinergistas,
-    required this.categoriaExercicio,
-    required this.series,
-    required this.descansoSegundos,
-  });
+//   Exercicio({
+//     required this.exercicioId,
+//     required this.nomeExercicio,
+//     required this.image_Url,
+//     required this.tipoExercicio,
+//     required this.musculoAlvo,
+//     required this.musculosSinergistas,
+//     required this.categoriaExercicio,
+//     required this.series,
+//     required this.descansoSegundos,
+//   });
 
-  factory Exercicio.fromJson(Map<String, dynamic> json) {
-    return Exercicio(
-      exercicioId: json['exercicio_Id'],
-      nomeExercicio: json['nome_Exercicio'],
-      tipoExercicio: json['tipo_Exercicio'],
-      musculoAlvo: json['musculo_Alvo'],
-      musculosSinergistas:
-          List<String>.from(json['musculos_Sinergistas'].map((x) => x)),
-      categoriaExercicio: json['categoria_Exercicio'],
-      series: List<Serie>.from(json['series'].map((x) => Serie.fromJson(x))),
-      descansoSegundos: json['descanso_Segundos'],
-    );
-  }
+//   factory Exercicio.fromJson(Map<String, dynamic> json) {
+//     return Exercicio(
+//       exercicioId: json['exercicio_Id'],
+//       nomeExercicio: json['nome_Exercicio'],
+//       image_Url: json['image_Url'],
+//       tipoExercicio: json['tipo_Exercicio'],
+//       musculoAlvo: json['musculo_Alvo'],
+//       musculosSinergistas:
+//           List<String>.from(json['musculos_Sinergistas'].map((x) => x)),
+//       categoriaExercicio: json['categoria_Exercicio'],
+//       series: List<SerieConcluido>.from(
+//           json['series'].map((x) => SerieConcluido.fromJson(x))),
+//       descansoSegundos: json['descanso_Segundos'],
+//     );
+//   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'exercicio_Id': exercicioId,
-      'nome_Exercicio': nomeExercicio,
-      'tipo_Exercicio': tipoExercicio,
-      'musculo_Alvo': musculoAlvo,
-      'musculos_Sinergistas':
-          List<dynamic>.from(musculosSinergistas.map((x) => x)),
-      'categoria_Exercicio': categoriaExercicio,
-      'series': List<dynamic>.from(series.map((x) => x.toJson())),
-      'descanso_Segundos': descansoSegundos,
-    };
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'exercicio_Id': exercicioId,
+//       'nome_Exercicio': nomeExercicio,
+//       'tipo_Exercicio': tipoExercicio,
+//       'musculo_Alvo': musculoAlvo,
+//       'musculos_Sinergistas':
+//           List<dynamic>.from(musculosSinergistas.map((x) => x)),
+//       'categoria_Exercicio': categoriaExercicio,
+//       'series': List<dynamic>.from(series.map((x) => x.toJson())),
+//       'descanso_Segundos': descansoSegundos,
+//     };
+//   }
+// }
 
-class Serie {
-  String tipoSerie;
-  double pesoKg;
-  int repeticoes;
-  bool concluido;
+// class SerieConcluido {
+//   String tipoSerie;
+//   double pesoKg;
+//   int repeticoes;
+//   bool concluido;
 
-  Serie({
-    required this.tipoSerie,
-    required this.pesoKg,
-    required this.repeticoes,
-    required this.concluido,
-  });
+//   SerieConcluido({
+//     required this.tipoSerie,
+//     required this.pesoKg,
+//     required this.repeticoes,
+//     required this.concluido,
+//   });
 
-  factory Serie.fromJson(Map<String, dynamic> json) {
-    return Serie(
-      tipoSerie: json['tipo_Serie'],
-      pesoKg: json['peso_kg'].toDouble(),
-      repeticoes: json['repeticoes'],
-      concluido: json['concluido'],
-    );
-  }
+//   factory SerieConcluido.fromJson(Map<String, dynamic> json) {
+//     return SerieConcluido(
+//       tipoSerie: json['tipo_Serie'],
+//       pesoKg: json['peso_kg'].toDouble(),
+//       repeticoes: json['repeticoes'],
+//       concluido: json['concluido'],
+//     );
+//   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'tipo_Serie': tipoSerie,
-      'peso_kg': pesoKg,
-      'repeticoes': repeticoes,
-      'concluido': concluido,
-    };
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'tipo_Serie': tipoSerie,
+//       'peso_kg': pesoKg,
+//       'repeticoes': repeticoes,
+//       'concluido': concluido,
+//     };
+//   }
+// }
