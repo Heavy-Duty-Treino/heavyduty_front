@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
 
@@ -15,10 +16,8 @@ class AppWidget extends StatelessWidget {
               bodyMedium: TextStyle(color: Colors.white),
               bodySmall: TextStyle(color: Colors.white))),
       title: 'Heavy App',
-      routerConfig: Routefly.routerConfig(
-        routes: routes,
-        initialPath: routePaths.splash,
-      ),
+      routerConfig:
+          Routefly.routerConfig(routes: routes, initialPath: routePaths.splash),
     );
   }
 }
