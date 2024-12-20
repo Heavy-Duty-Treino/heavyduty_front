@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:heavyduty_front/App/components/base_screem.dart';
-import 'package:heavyduty_front/App/components/card_duracao.dart';
-import 'package:heavyduty_front/App/components/card_frequencia.dart';
-import 'package:heavyduty_front/App/components/card_historico.dart';
-import 'package:heavyduty_front/App/components/card_volume.dart';
+import 'package:heavyduty_front/App/components/shared/base_screem.dart';
+import 'package:heavyduty_front/App/components/homepage/card_duracao.dart';
+import 'package:heavyduty_front/App/components/homepage/card_frequencia.dart';
+import 'package:heavyduty_front/App/components/homepage/card_historico.dart';
+import 'package:heavyduty_front/App/components/homepage/card_volume.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

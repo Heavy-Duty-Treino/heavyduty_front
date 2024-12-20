@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
 
 class ExercicioServices {
-  final urlDefault = 'http://localhost:5126/api/exercicio';
+  final urlDefault = 'http://192.168.1.66:5126/api/exercicio';
   final dio = Dio();
 
   Future<List<ExercicioModel>> getAll() async {
@@ -12,6 +12,7 @@ class ExercicioServices {
         .map((map) => ExercicioModel(
             id: map['id'],
             nome_exercicio: map['nome_Exercicio'],
+            image_Url: map['image_Url'],
             nome_usuario: map['nome_Usuario'],
             tipo_exercicio: map['tipo_Exercicio'],
             musculo_alvo: map['musculo_Alvo'],

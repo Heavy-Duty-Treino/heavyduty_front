@@ -1,5 +1,5 @@
 class Treino {
-  String id;
+  String? id;
   String titulo;
   String nomeUsuario;
   String fotoPerfilUsuario;
@@ -27,7 +27,6 @@ class Treino {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
       'titulo': titulo,
       'nome_Usuario': nomeUsuario,
       'foto_Perfil_Usuario': fotoPerfilUsuario,
@@ -39,9 +38,10 @@ class Treino {
 class Exercicio {
   String exercicioId;
   String nomeExercicio;
+  String imageUrl;
   String tipoExercicio;
   String musculoAlvo;
-  List<String> musculosSinergistas;
+  List<dynamic> musculosSinergistas;
   String categoriaExercicio;
   List<Serie> series;
   int descansoSegundos;
@@ -49,6 +49,7 @@ class Exercicio {
   Exercicio({
     required this.exercicioId,
     required this.nomeExercicio,
+    required this.imageUrl,
     required this.tipoExercicio,
     required this.musculoAlvo,
     required this.musculosSinergistas,
@@ -61,6 +62,7 @@ class Exercicio {
     return Exercicio(
       exercicioId: json['exercicio_Id'],
       nomeExercicio: json['nome_Exercicio'],
+      imageUrl: json['image_Url'],
       tipoExercicio: json['tipo_Exercicio'],
       musculoAlvo: json['musculo_Alvo'],
       musculosSinergistas:
@@ -75,6 +77,7 @@ class Exercicio {
     return {
       'exercicio_Id': exercicioId,
       'nome_Exercicio': nomeExercicio,
+      'image_Url': imageUrl,
       'tipo_Exercicio': tipoExercicio,
       'musculo_Alvo': musculoAlvo,
       'musculos_Sinergistas': musculosSinergistas,
