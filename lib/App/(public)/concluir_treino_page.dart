@@ -26,6 +26,7 @@ class _ConcluirTreinoPageState extends State<ConcluirTreinoPage> {
             color: Colors.black,
             padding: EdgeInsets.only(top: 50),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BaseButton(
                     title: "Voltar",

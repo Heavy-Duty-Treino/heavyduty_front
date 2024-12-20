@@ -68,7 +68,7 @@ class _BaseScreemState extends State<BaseScreem> {
               label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.fit_screen_outlined,
+                Icons.note_alt_rounded,
                 color: Color.fromARGB(255, 112, 112, 112),
               ),
               label: 'Treino')

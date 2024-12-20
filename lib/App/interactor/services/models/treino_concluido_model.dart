@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
 class TreinoConcluido {
