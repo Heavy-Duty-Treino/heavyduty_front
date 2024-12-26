@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/LoginModelDTO.dart';
@@ -14,7 +15,12 @@ class LoginServices {
         options: Options(headers: {
           'Content-Type': 'application/json',
         }));
-    var json = LoginModelDTO.fromJson(response.data);
-    return json;
+    if (response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300) {
+      return LoginModelDTO.fromJson(response.data);
+    } else {
+      throw Exception('Erro inesperado: ');
+    }
   }
 }
