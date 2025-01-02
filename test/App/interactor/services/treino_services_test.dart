@@ -7,7 +7,7 @@ import 'package:heavyduty_front/App/interactor/services/treino_services.dart';
 void main() {
   test('get all treinos', () async {
     final service = TreinoServices();
-    var treinos = await service.getAll();
+    var treinos = await service.getAll("heavyduty@gmail.com");
     expect(treinos.isNotEmpty, true);
   });
 
