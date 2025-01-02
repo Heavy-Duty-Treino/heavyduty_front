@@ -38,6 +38,7 @@ dependencies:
   routefly: ^2.0.3
   dio: ^5.7.0
   get: ^4.6.6
+  shared_preferences: ^2.3.4
 
 dev_dependencies:
   flutter_test:

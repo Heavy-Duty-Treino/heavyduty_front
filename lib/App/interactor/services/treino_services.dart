@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
 class TreinoServices {
-  final urlDefalult = 'http://192.168.1.66:5126/api/treino';
+  final urlDefalult = 'http://192.168.1.64:5126/api/treino';
   final dio = Dio();
 
-  Future<List<Treino>> getAll() async {
-    final response = await dio.get(urlDefalult);
+  Future<List<Treino>> getAll(String email) async {
+    final response = await dio.get("$urlDefalult/$email");
     final data = response.data as List;
     List<Treino> treinos = data.map((json) => Treino.fromJson(json)).toList();
     return treinos;
