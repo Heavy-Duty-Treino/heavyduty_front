@@ -6,7 +6,7 @@ import 'package:heavyduty_front/App/interactor/services/models/LoginModelDTO.dar
 import 'package:heavyduty_front/App/interactor/services/models/Login_model.dart';
 
 class LoginServices {
-  final urlDefault = 'http://192.168.1.66:5126/api/usuario/login';
+  final urlDefault = 'http://192.168.1.64:5126/api/usuario/login';
   final dio = Dio();
 
   Future<LoginModelDTO> authenticate(Login model) async {

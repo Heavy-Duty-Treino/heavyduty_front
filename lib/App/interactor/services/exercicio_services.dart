@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
 
 class ExercicioServices {
-  final urlDefault = 'http://192.168.1.66:5126/api/exercicio';
+  final urlDefault = 'http://192.168.1.64:5126/api/exercicio';
   final dio = Dio();
 
   Future<List<ExercicioModel>> getAll() async {
