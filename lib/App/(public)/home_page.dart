@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:heavyduty_front/App/components/shared/base_screem.dart';
 import 'package:heavyduty_front/App/components/homepage/card_duracao.dart';
 import 'package:heavyduty_front/App/components/homepage/card_frequencia.dart';
@@ -15,20 +16,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const BaseScreem(
+    return BaseScreem(
         title: 'Home Page',
         body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-            padding: EdgeInsets.only(left: 15),
-            child: Text('Sua Atividade'),
-          ),
+              padding: EdgeInsets.only(left: 15), child: Text("Sua Atividade")),
           Row(
             children: [
               Expanded(
                   child: Padding(
-                padding: EdgeInsets.only(left: 8, top: 8, bottom: 4, right: 4),
-                child: CardVolume(),
-              )),
+                      padding:
+                          EdgeInsets.only(left: 8, top: 8, bottom: 4, right: 4),
+                      child: CardVolume())),
               Expanded(
                 child: Padding(
                   padding:
