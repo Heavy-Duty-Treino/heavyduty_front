@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 import 'package:heavyduty_front/App/interactor/controllers/exercicioController.dart';

@@ -65,25 +65,53 @@ class LoginPageController extends GetxController {
 
     sectionVolume.assignAll([
       PieChartSectionData(
-        value: costas.toDouble(),
-        color: Colors.purple,
-        radius: 70,
-      ),
+          value: costas.toDouble(),
+          color: Colors.purple,
+          radius: 70,
+          showTitle: false,
+          badgeWidget: ClipOval(
+              child: Image.asset(
+            "assets/costas.png",
+            height: 30,
+            fit: BoxFit.cover,
+          )),
+          badgePositionPercentageOffset: 1),
       PieChartSectionData(
-        value: peito.toDouble(),
-        color: Colors.blue,
-        radius: 70,
-      ),
+          value: peito.toDouble(),
+          color: Colors.blue,
+          radius: 70,
+          showTitle: false,
+          badgeWidget: ClipOval(
+              child: Image.asset(
+            "assets/peitoral.jpg",
+            height: 30,
+            fit: BoxFit.cover,
+          )),
+          badgePositionPercentageOffset: 1),
       PieChartSectionData(
-        value: quadriceps.toDouble(),
-        color: Colors.orange,
-        radius: 70,
-      ),
+          value: quadriceps.toDouble(),
+          color: Colors.orange,
+          radius: 70,
+          showTitle: false,
+          badgeWidget: ClipOval(
+              child: Image.asset(
+            "assets/quadriceps.jpg",
+            height: 30,
+            fit: BoxFit.cover,
+          )),
+          badgePositionPercentageOffset: 1),
       PieChartSectionData(
-        value: posterior.toDouble(),
-        color: Colors.green,
-        radius: 70,
-      ),
+          value: posterior.toDouble(),
+          color: Colors.green,
+          radius: 70,
+          showTitle: false,
+          badgeWidget: ClipOval(
+              child: Image.asset(
+            "assets/posterior.jpg",
+            height: 30,
+            fit: BoxFit.cover,
+          )),
+          badgePositionPercentageOffset: 1),
     ]);
   }
 }
