@@ -10,7 +10,7 @@ class Treinocontroller {
 
   Future<void> GetAll() async {
     final prefs = await SharedPreferences.getInstance();
-    var email = prefs.getString("authUserName");
+    var email = prefs.getString("authUserEmail");
     var result = await service.getAll(email!);
     treinos.assignAll(result);
   }

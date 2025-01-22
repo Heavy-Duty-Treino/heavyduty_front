@@ -12,20 +12,18 @@ class Criartreinopagecontroller extends GetxController {
   final service = TreinoServices();
 
   Future<void> CreateTreino(String title) async {
-    var name = await loginController.getName();
+    var email = await loginController.getEmail();
 
-    if (name != null) {
-      var treino = Treino(
-          id: null,
-          titulo: title,
-          nomeUsuario: name,
-          fotoPerfilUsuario: 'http:heavyduty.com',
-          exercicios: excontroller.selectedExercicios);
-      var response = await service.Create(treino);
-      if (response.statusCode == 200) {
-        excontroller.clear();
-        Routefly.navigate(routePaths.treino);
-      }
+    var treino = Treino(
+        id: null,
+        titulo: title,
+        nomeUsuario: email,
+        fotoPerfilUsuario: 'http:heavyduty.com',
+        exercicios: excontroller.selectedExercicios);
+    var response = await service.Create(treino);
+    if (response.statusCode == 200) {
+      excontroller.clear();
+      Routefly.navigate(routePaths.treino);
     }
   }
 }

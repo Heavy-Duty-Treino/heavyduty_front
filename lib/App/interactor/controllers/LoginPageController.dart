@@ -23,7 +23,8 @@ class LoginPageController extends GetxController {
         email: emailInput.value.text, password: passwordInput.value.text);
     try {
       var auth = await services.authenticate(user);
-      saveToken(auth.token, emailInput.value.text);
+      saveToken(auth.token, emailInput.value.text, auth.usuario.imageUrl,
+          auth.usuario.nomeUsuario);
       if (auth.data == 'Usuario Autenticado') {
         setChatData();
         Routefly.navigate(routePaths.home);
@@ -33,10 +34,27 @@ class LoginPageController extends GetxController {
     }
   }
 
-  Future<void> saveToken(String userToken, String name) async {
+  Future<void> saveToken(
+      String userToken, String name, String image, String nome) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("authUserToken", userToken);
-    await prefs.setString("authUserName", name);
+    await prefs.setString("authUserEmail", name);
+    await prefs.setString("userImage", image);
+    await prefs.setString("userName", nome);
+  }
+
+  Future<String> getEmail() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? email = prefs.getString("authUserEmail");
+
+      return (email != null && email.isNotEmpty)
+          ? email
+          : "Usuario desconhecido";
+    } catch (e) {
+      debugPrint("Erro ao obter o email: $e");
+      return "erro ao carregar email";
+    }
   }
 
   Future<String?> getToken() async {
@@ -45,10 +63,25 @@ class LoginPageController extends GetxController {
   }
 
   Future<String> getName() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? nome = prefs.getString("userName");
+
+      // Retorna o nome se não for nulo e não estiver vazio, senão retorna um valor padrão
+      return (nome != null && nome.isNotEmpty) ? nome : "Usuário desconhecido";
+    } catch (e) {
+      debugPrint("Erro ao obter o nome do usuário: $e");
+      return "Erro ao carregar";
+    }
+  }
+
+  Future<String> getImage() async {
     final prefs = await SharedPreferences.getInstance();
-    var email = prefs.getString("authUserName");
-    if (email!.isEmpty) return email;
-    return "";
+    var image = prefs.getString("userImage");
+    if (image == null || image.isEmpty) {
+      return "https://via.placeholder.com/150"; // Uma imagem padrão
+    }
+    return image;
   }
 
   void setChatData() async {

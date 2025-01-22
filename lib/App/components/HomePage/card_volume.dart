@@ -28,7 +28,6 @@ class _CardVolumeState extends State<CardVolume> {
           height: 300,
           child: Column(
             children: [
-              Text("data"),
               Expanded(
                 child: PieChart(PieChartData(
                     centerSpaceRadius: 0, sections: _controller.sectionVolume)),
