@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
 
@@ -20,6 +22,7 @@ class _BaseScreemState extends State<BaseScreem> {
 
   @override
   Widget build(BuildContext context) {
+    final LoginPageController _controller = Get.find<LoginPageController>();
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(140),
@@ -31,19 +34,44 @@ class _BaseScreemState extends State<BaseScreem> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      color: Colors.white,
+                    child: FutureBuilder<String>(
+                      future: _controller.getImage(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        }
+                        if (snapshot.hasError) {
+                          return Text("Erro ao carregar imagem");
+                        }
+
+                        if (snapshot.data == null || snapshot.data!.isEmpty) {
+                          return Icon(Icons.account_circle, size: 50);
+                        }
+
+                        return Image.network(snapshot.data!);
+                      },
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Nome Usuario'),
+                        FutureBuilder<String>(
+                            future: _controller.getName(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              }
+                              if (snapshot.hasError) {
+                                return Text("Erro ao buscar nome");
+                              }
+                              debugPrint(snapshot.data);
+                              return Text(snapshot.data!);
+                            }),
                         Padding(
                           padding: EdgeInsets.only(top: 8),
                           child: Text('Terca Feira, 01 Outubro'),
