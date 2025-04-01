@@ -17,6 +17,20 @@ class LoginPageController extends GetxController {
   TextEditingController passwordInput = TextEditingController();
   var chatData = Rxn<dynamic>();
   var sectionVolume = <PieChartSectionData>[].obs;
+  var isLoading = false.obs;
+
+  Future<void> preloadImages() async {
+    try {
+      await Future.wait([
+        precacheImage(AssetImage("assets/costas.png"), Get.context!),
+        precacheImage(AssetImage("assets/peitoral.jpg"), Get.context!),
+        precacheImage(AssetImage("assets/quadriceps.jpg"), Get.context!),
+        precacheImage(AssetImage("assets/posterior.jpg"), Get.context!),
+      ]);
+    } catch (e) {
+      log("Erro ao pré-carregar imagens: ", error: e);
+    }
+  }
 
   void authenticate() async {
     var user = new Login(
@@ -85,9 +99,17 @@ class LoginPageController extends GetxController {
   }
 
   void setChatData() async {
-    final response = await userServices.getChartData();
-    chatData.value = response.data;
-    generateFixedPieChartSections(chatData);
+    try {
+      isLoading.value = true;
+      await preloadImages();
+      final response = await userServices.getChartData();
+      chatData.value = response.data;
+      generateFixedPieChartSections(chatData);
+    } catch (e) {
+      log("Erro ao carregar dados do gráfico: ", error: e);
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void generateFixedPieChartSections(Rxn<dynamic> data) {
@@ -106,7 +128,11 @@ class LoginPageController extends GetxController {
               child: Image.asset(
             "assets/costas.png",
             height: 30,
+            width: 30,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.error, color: Colors.red);
+            },
           )),
           badgePositionPercentageOffset: 1),
       PieChartSectionData(
@@ -118,7 +144,11 @@ class LoginPageController extends GetxController {
               child: Image.asset(
             "assets/peitoral.jpg",
             height: 30,
+            width: 30,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.error, color: Colors.red);
+            },
           )),
           badgePositionPercentageOffset: 1),
       PieChartSectionData(
@@ -130,7 +160,11 @@ class LoginPageController extends GetxController {
               child: Image.asset(
             "assets/quadriceps.jpg",
             height: 30,
+            width: 30,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.error, color: Colors.red);
+            },
           )),
           badgePositionPercentageOffset: 1),
       PieChartSectionData(
@@ -142,7 +176,11 @@ class LoginPageController extends GetxController {
               child: Image.asset(
             "assets/posterior.jpg",
             height: 30,
+            width: 30,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.error, color: Colors.red);
+            },
           )),
           badgePositionPercentageOffset: 1),
     ]);
