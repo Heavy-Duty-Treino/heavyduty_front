@@ -25,15 +25,23 @@ class _CardVolumeState extends State<CardVolume> {
     return Card(
       color: Colors.indigo[900],
       child: Container(
-          height: 300,
-          child: Column(
-            children: [
-              Expanded(
-                child: PieChart(PieChartData(
-                    centerSpaceRadius: 0, sections: _controller.sectionVolume)),
+        height: 300,
+        child: Obx(() {
+          if (_controller.isLoading.value) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
               ),
-            ],
-          )),
+            );
+          }
+          return PieChart(
+            PieChartData(
+              centerSpaceRadius: 0,
+              sections: _controller.sectionVolume,
+            ),
+          );
+        }),
+      ),
     );
   }
 }
