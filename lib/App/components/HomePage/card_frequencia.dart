@@ -38,12 +38,20 @@ class _CardFrequenciaState extends State<CardFrequencia> {
 
 Widget getTitles(double value, TitleMeta meta) {
   final style = TextStyle(
-    color: Colors.lightBlue,
+    color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 14,
   );
+
+  // Obtém o mês atual (0-11)
+  final now = DateTime.now();
+  final currentMonth = now.month - 1;
+
+  // Calcula o mês para o índice atual
+  int monthIndex = (currentMonth - (5 - value.toInt())) % 12;
+
   String text;
-  switch (value.toInt()) {
+  switch (monthIndex) {
     case 0:
       text = 'Jan';
       break;
@@ -104,10 +112,7 @@ List<BarChartGroupData> get barGroups => [
       BarChartGroupData(
         x: 0,
         barRods: [
-          BarChartRodData(
-            toY: 8,
-            gradient: _barsGradient,
-          )
+          BarChartRodData(toY: 8, gradient: _barsGradient, color: Colors.red)
         ],
       ),
       BarChartGroupData(
@@ -155,58 +160,4 @@ List<BarChartGroupData> get barGroups => [
           )
         ],
       ),
-      BarChartGroupData(
-        x: 6,
-        barRods: [
-          BarChartRodData(
-            toY: 4,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 7,
-        barRods: [
-          BarChartRodData(
-            toY: 4,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 8,
-        barRods: [
-          BarChartRodData(
-            toY: 4,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 9,
-        barRods: [
-          BarChartRodData(
-            toY: 4,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 10,
-        barRods: [
-          BarChartRodData(
-            toY: 4,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 11,
-        barRods: [
-          BarChartRodData(
-            toY: 4,
-            gradient: _barsGradient,
-          )
-        ],
-      )
     ];
