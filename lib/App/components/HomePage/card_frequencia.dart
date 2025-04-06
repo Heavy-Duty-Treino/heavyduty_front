@@ -1,163 +1,123 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 
 class CardFrequencia extends StatefulWidget {
-  const CardFrequencia({super.key});
+  const CardFrequencia({
+    super.key,
+  });
 
   @override
   State<CardFrequencia> createState() => _CardFrequenciaState();
 }
 
 class _CardFrequenciaState extends State<CardFrequencia> {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        color: Colors.blueAccent,
-        child: Container(
-          height: 300,
-          child: BarChart(BarChartData(
-              barGroups: barGroups,
-              borderData: FlBorderData(show: false),
-              gridData: const FlGridData(show: false),
-              barTouchData: BarTouchData(enabled: false),
-              titlesData: const FlTitlesData(
-                  show: true,
-                  leftTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  topTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                          showTitles: true, getTitlesWidget: getTitles))),
-              maxY: 10)),
-        ));
-  }
-}
+  final controller = Get.find<LoginPageController>();
 
-Widget getTitles(double value, TitleMeta meta) {
-  final style = TextStyle(
+  // Constantes e estilos
+  static const _maxY = 10.0;
+  static const _cardColor = Colors.blueAccent;
+  static const _containerHeight = 300.0;
+  static const _textStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 14,
   );
 
-  // Obtém o mês atual (0-11)
+  // Gradiente para as barras
+  static final _barsGradient = LinearGradient(
+    colors: [Colors.cyan, Colors.cyanAccent],
+    begin: Alignment.bottomCenter,
+    end: Alignment.topCenter,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    controller.setBarData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      debugPrint('BarData atual: ${controller.barData.length} elementos');
+      return Card(
+        color: _cardColor,
+        child: Container(
+          height: _containerHeight,
+          child: BarChart(
+            BarChartData(
+              barGroups: controller.barData,
+              borderData: FlBorderData(show: false),
+              gridData: const FlGridData(show: false),
+              barTouchData: BarTouchData(enabled: false),
+              titlesData: const FlTitlesData(
+                show: true,
+                leftTitles:
+                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                rightTitles:
+                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                topTitles:
+                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: getTitles,
+                  ),
+                ),
+              ),
+              maxY: _maxY,
+            ),
+          ),
+        ),
+      );
+    });
+  }
+}
+
+// Função para gerar os títulos dos meses
+Widget getTitles(double value, TitleMeta meta) {
   final now = DateTime.now();
   final currentMonth = now.month - 1;
-
-  // Calcula o mês para o índice atual
   int monthIndex = (currentMonth - (5 - value.toInt())) % 12;
 
-  String text;
-  switch (monthIndex) {
-    case 0:
-      text = 'Jan';
-      break;
-    case 1:
-      text = 'Fev';
-      break;
-    case 2:
-      text = 'Mar';
-      break;
-    case 3:
-      text = 'Abr';
-      break;
-    case 4:
-      text = 'Mai';
-      break;
-    case 5:
-      text = 'Jun';
-      break;
-    case 6:
-      text = 'Jul';
-      break;
-    case 7:
-      text = 'Ago';
-      break;
-    case 8:
-      text = 'Set';
-      break;
-    case 9:
-      text = 'Out';
-      break;
-    case 10:
-      text = 'Nov';
-      break;
-    case 11:
-      text = 'Dez';
-      break;
-    default:
-      text = '';
-      break;
-  }
+  String text = _getMonthAbbreviation(monthIndex);
+
   return SideTitleWidget(
     space: 4,
     axisSide: meta.axisSide,
-    child: Text(text, style: style),
+    child: Text(text, style: _CardFrequenciaState._textStyle),
   );
 }
 
-LinearGradient get _barsGradient => LinearGradient(
-      colors: [
-        Colors.cyan,
-        Colors.cyanAccent,
-      ],
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
-    );
-
-List<BarChartGroupData> get barGroups => [
-      BarChartGroupData(
-        x: 0,
-        barRods: [
-          BarChartRodData(toY: 8, gradient: _barsGradient, color: Colors.red)
-        ],
-      ),
-      BarChartGroupData(
-        x: 1,
-        barRods: [
-          BarChartRodData(
-            toY: 5,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 2,
-        barRods: [
-          BarChartRodData(
-            toY: 10,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 3,
-        barRods: [
-          BarChartRodData(
-            toY: 9,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 4,
-        barRods: [
-          BarChartRodData(
-            toY: 8,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-      BarChartGroupData(
-        x: 5,
-        barRods: [
-          BarChartRodData(
-            toY: 10,
-            gradient: _barsGradient,
-          )
-        ],
-      ),
-    ];
+String _getMonthAbbreviation(int monthIndex) {
+  switch (monthIndex) {
+    case 0:
+      return 'Jan';
+    case 1:
+      return 'Fev';
+    case 2:
+      return 'Mar';
+    case 3:
+      return 'Abr';
+    case 4:
+      return 'Mai';
+    case 5:
+      return 'Jun';
+    case 6:
+      return 'Jul';
+    case 7:
+      return 'Ago';
+    case 8:
+      return 'Set';
+    case 9:
+      return 'Out';
+    case 10:
+      return 'Nov';
+    case 11:
+      return 'Dez';
+    default:
+      return '';
+  }
+}
