@@ -1,18 +1,28 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserServices {
-  final urlDefalult = "http://192.168.1.68:5126/api/usuario/chartdata";
+  final urlDefalult = "http://192.168.1.70:5126/api/usuario/";
   final dio = Dio();
 
-  Future<Response<dynamic>> getChartData() async {
+  Future<String?> GetEmail() async {
     var prefs = await SharedPreferences.getInstance();
-    var email = prefs.getString("authUserName");
+    return prefs.getString("authUserEmail");
+  }
 
-    final response = await dio.get('$urlDefalult/$email');
+  Future<Response<dynamic>> getChartData() async {
+    var email = await GetEmail();
+    final response = await dio.get('${urlDefalult}chartvolumedata/$email');
+    return response;
+  }
 
+  Future<Response<dynamic>> getBarData() async {
+    var email = await GetEmail();
+    final response = await dio.get('${urlDefalult}chartHistoryData/$email');
     return response;
   }
 }
