@@ -18,11 +18,10 @@ class _CardFrequenciaState extends State<CardFrequencia> {
   // Constantes e estilos
   static const _maxY = 10.0;
   static const _cardColor = Colors.blueAccent;
-  static const _containerHeight = 300.0;
   static const _textStyle = TextStyle(
-    color: Colors.black,
+    color: Colors.white,
     fontWeight: FontWeight.bold,
-    fontSize: 14,
+    fontSize: 12,
   );
 
   // Gradiente para as barras
@@ -45,7 +44,7 @@ class _CardFrequenciaState extends State<CardFrequencia> {
       return Card(
         color: _cardColor,
         child: Container(
-          height: _containerHeight,
+          padding: const EdgeInsets.all(8),
           child: BarChart(
             BarChartData(
               barGroups: controller.barData,

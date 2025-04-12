@@ -6,7 +6,7 @@ import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.d
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserServices {
-  final urlDefalult = "http://192.168.1.70:5126/api/usuario/";
+  final urlDefalult = "https://heavyduty-back-1.onrender.com/api/usuario/";
   final dio = Dio();
 
   Future<String?> GetEmail() async {
