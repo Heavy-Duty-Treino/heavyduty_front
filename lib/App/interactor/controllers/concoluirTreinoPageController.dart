@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_concluido_model.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
@@ -7,11 +9,31 @@ import 'package:routefly/routefly.dart';
 
 class ConcoluirTreinoPageController extends GetxController {
   late Rx<Treino> treino;
+  late Timer _timer;
+  var start = 0.obs;
   var exercicios = <Exercicio>[].obs;
   final service = TreinoConcluidoService();
 
   void setTreino(Treino model) {
     treino = model.obs;
+    startTime();
+  }
+
+  void startTime() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (Timer timer) {
+      start.value++;
+    });
+  }
+
+  void stopTimer() {
+    _timer.cancel();
+  }
+
+  @override
+  void onClose() {
+    _timer.cancel();
+    super.onClose();
   }
 
   void setExercicio(id) {
@@ -62,14 +84,19 @@ class ConcoluirTreinoPageController extends GetxController {
   }
 
   Future<void> concluir() async {
-    var treinoConcluido = new TreinoConcluido(
+    var treinoConcluido = TreinoConcluido(
         idTreino: treino.value.id,
         titulo: treino.value.titulo,
         nomeUsuario: treino.value.nomeUsuario,
         fotoPerfilUsuario: treino.value.fotoPerfilUsuario,
+        duracao: start.value,
         exercicios: treino.value.exercicios);
     var response = await service.Create(treinoConcluido);
-    if (response.statusCode == 200) return Routefly.navigate(routePaths.treino);
+    if (response.statusCode == 200) {
+      stopTimer();
+      start.value = 0;
+      return Routefly.navigate(routePaths.treino);
+    }
   }
   // void setSeries(String idExercicio) {
   //   final exercicio = treino.value.exercicios

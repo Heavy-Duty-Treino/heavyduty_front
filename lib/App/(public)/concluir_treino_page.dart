@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:heavyduty_front/App/components/shared/base_button.dart';
@@ -17,6 +19,22 @@ class _ConcluirTreinoPageState extends State<ConcluirTreinoPage> {
   final ConcoluirTreinoPageController _controller =
       Get.put(ConcoluirTreinoPageController());
 
+  String formatTime(RxInt seconds) {
+    int hrs = (seconds ~/ 3600);
+    int mins = ((seconds % 3600) ~/ 60);
+    int secs = (seconds % 60).toInt();
+
+    return '${hrs.toString().padLeft(2, '0')}:${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.stopTimer();
+    _controller.start.value = 0;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +51,7 @@ class _ConcluirTreinoPageState extends State<ConcluirTreinoPage> {
                     ph: 10,
                     pv: 10,
                     onPressed: () => {Routefly.navigate(routePaths.treino)}),
-                Text('Treinamento'),
+                Obx(() => Text(formatTime(_controller.start))),
                 BaseButton(
                     title: "Concluir",
                     ph: 10,
