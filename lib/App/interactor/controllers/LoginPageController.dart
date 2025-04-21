@@ -25,6 +25,7 @@ class LoginPageController extends GetxController {
   final barData = <BarChartGroupData>[].obs;
   final sectionVolume = <PieChartSectionData>[].obs;
   final isLoading = false.obs;
+  final average = 0.0.obs;
 
   // Constantes
   static const _gradientColors = [Colors.cyan, Colors.cyanAccent];
@@ -33,20 +34,14 @@ class LoginPageController extends GetxController {
 
   // ================ Métodos de Autenticação ================
   void authenticate() async {
-    final user = Login(
-      email: emailInput.value.text,
-      password: passwordInput.value.text
-    );
-    
+    final user =
+        Login(email: emailInput.value.text, password: passwordInput.value.text);
+
     try {
       final auth = await services.authenticate(user);
-      await saveToken(
-        auth.token,
-        emailInput.value.text,
-        auth.usuario.imageUrl,
-        auth.usuario.nomeUsuario
-      );
-      
+      await saveToken(auth.token, emailInput.value.text, auth.usuario.imageUrl,
+          auth.usuario.nomeUsuario);
+
       if (auth.data == 'Usuario Autenticado') {
         await loadData();
         Routefly.navigate(routePaths.home);
@@ -57,11 +52,7 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> saveToken(
-    String userToken,
-    String email,
-    String image,
-    String nome
-  ) async {
+      String userToken, String email, String image, String nome) async {
     final prefs = await SharedPreferences.getInstance();
     await Future.wait([
       prefs.setString("authUserToken", userToken),
@@ -76,7 +67,9 @@ class LoginPageController extends GetxController {
     try {
       final prefs = await SharedPreferences.getInstance();
       final email = prefs.getString("authUserEmail");
-      return (email != null && email.isNotEmpty) ? email : "Usuario desconhecido";
+      return (email != null && email.isNotEmpty)
+          ? email
+          : "Usuario desconhecido";
     } catch (e) {
       debugPrint("Erro ao obter o email: $e");
       return "erro ao carregar email";
@@ -102,9 +95,9 @@ class LoginPageController extends GetxController {
   Future<String> getImage() async {
     final prefs = await SharedPreferences.getInstance();
     final image = prefs.getString("userImage");
-    return (image == null || image.isEmpty) 
-      ? "https://via.placeholder.com/150"
-      : image;
+    return (image == null || image.isEmpty)
+        ? "https://via.placeholder.com/150"
+        : image;
   }
 
   // ================ Métodos de Carregamento de Dados ================
@@ -134,13 +127,14 @@ class LoginPageController extends GetxController {
       isLoading.value = true;
       debugPrint('Iniciando setBarData...');
       debugPrint('Chamando userServices.getBarData()...');
-      
+
       final response = await userServices.getBarData();
       debugPrint('Resposta recebida do getBarData: ${response.data}');
       debugPrint('Tipo da resposta: ${response.data.runtimeType}');
-      
+
       barData.value = getBarGroups(response.data);
-      debugPrint('BarData atualizado com sucesso. Quantidade de elementos: ${barData.length}');
+      debugPrint(
+          'BarData atualizado com sucesso. Quantidade de elementos: ${barData.length}');
     } catch (e) {
       log("Erro ao carregar dados do gráfico: ", error: e);
       debugPrint('Erro detalhado: $e');
@@ -180,10 +174,7 @@ class LoginPageController extends GetxController {
   }
 
   PieChartSectionData _createPieSection(
-    dynamic value,
-    Color color,
-    String assetPath
-  ) {
+      dynamic value, Color color, String assetPath) {
     return PieChartSectionData(
       value: value.toDouble(),
       color: color,
@@ -234,22 +225,40 @@ class LoginPageController extends GetxController {
     return groups;
   }
 
+  Future<void> GetAverageHours() async {
+    var response = await userServices.getAverageHours();
+    average.value = response.data;
+  }
+
   // ================ Métodos Auxiliares ================
   String _getMonthName(int monthIndex) {
     switch (monthIndex) {
-      case 0: return 'janeiro';
-      case 1: return 'fevereiro';
-      case 2: return 'marco';
-      case 3: return 'abril';
-      case 4: return 'maio';
-      case 5: return 'junho';
-      case 6: return 'julho';
-      case 7: return 'agosto';
-      case 8: return 'setembro';
-      case 9: return 'outubro';
-      case 10: return 'novembro';
-      case 11: return 'dezembro';
-      default: return '';
+      case 0:
+        return 'janeiro';
+      case 1:
+        return 'fevereiro';
+      case 2:
+        return 'marco';
+      case 3:
+        return 'abril';
+      case 4:
+        return 'maio';
+      case 5:
+        return 'junho';
+      case 6:
+        return 'julho';
+      case 7:
+        return 'agosto';
+      case 8:
+        return 'setembro';
+      case 9:
+        return 'outubro';
+      case 10:
+        return 'novembro';
+      case 11:
+        return 'dezembro';
+      default:
+        return '';
     }
   }
 }

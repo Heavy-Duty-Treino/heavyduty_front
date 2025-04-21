@@ -25,4 +25,10 @@ class UserServices {
     final response = await dio.get('${urlDefalult}chartHistoryData/$email');
     return response;
   }
+
+  Future<Response<dynamic>> getAverageHours() async {
+    var email = await GetEmail();
+    final response = await dio.get('${urlDefalult}AverageHours/$email');
+    return response;
+  }
 }
