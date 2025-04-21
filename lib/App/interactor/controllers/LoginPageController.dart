@@ -26,6 +26,7 @@ class LoginPageController extends GetxController {
   final sectionVolume = <PieChartSectionData>[].obs;
   final isLoading = false.obs;
   final average = 0.0.obs;
+  final trainCounts = 0.obs;
 
   // Constantes
   static const _gradientColors = [Colors.cyan, Colors.cyanAccent];
@@ -228,6 +229,11 @@ class LoginPageController extends GetxController {
   Future<void> GetAverageHours() async {
     var response = await userServices.getAverageHours();
     average.value = response.data;
+  }
+
+  Future<void> GetHistoryUser() async {
+    var response = await userServices.GetUserTrainingHistory();
+    trainCounts.value = response.data;
   }
 
   // ================ Métodos Auxiliares ================

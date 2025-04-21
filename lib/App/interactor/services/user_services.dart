@@ -31,4 +31,11 @@ class UserServices {
     final response = await dio.get('${urlDefalult}AverageHours/$email');
     return response;
   }
+
+  Future<Response<dynamic>> GetUserTrainingHistory() async {
+    var email = await GetEmail();
+    final response =
+        await dio.get('${urlDefalult}GetUserTrainingHistory/$email');
+    return response;
+  }
 }
