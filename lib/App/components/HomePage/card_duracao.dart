@@ -33,7 +33,7 @@ class _CardDuracaoState extends State<CardDuracao> {
       if (controller.average.value == 0) {
         // Não tem treino na semana
         return Card(
-          color: Colors.blueAccent,
+          color: const Color.fromARGB(255, 0, 7, 44),
           child: SizedBox(
             height: 300,
             child: Column(
@@ -63,72 +63,69 @@ class _CardDuracaoState extends State<CardDuracao> {
 
       // Tem treino: exibe o gráfico e média
       return Card(
-        color: Colors.blueAccent,
-        child: SizedBox(
-          height: 300,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Média',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+        color: const Color.fromARGB(255, 0, 7, 44),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Média',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    Icon(Icons.access_time, color: Colors.white54, size: 30)
+                  ),
+                  Icon(Icons.access_time, color: Colors.white54, size: 30)
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              formatTime(controller.average),
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: LineChart(
+                LineChartData(
+                  titlesData: FlTitlesData(show: false),
+                  gridData: FlGridData(show: false),
+                  borderData: FlBorderData(show: false),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: const [
+                        FlSpot(0, 1),
+                        FlSpot(1, 2),
+                        FlSpot(2, 1.3),
+                        FlSpot(3, 1.3),
+                        FlSpot(4, 2),
+                      ],
+                      isCurved: true,
+                      color: Colors.white24,
+                      dotData: FlDotData(
+                        show: true,
+                        getDotPainter: (spot, percent, barData, index) =>
+                            FlDotCirclePainter(
+                          radius: 4,
+                          color: Colors.white70,
+                          strokeWidth: 0,
+                        ),
+                      ),
+                      barWidth: 2,
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 12),
-              Text(
-                formatTime(controller.average),
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Expanded(
-                child: LineChart(
-                  LineChartData(
-                    titlesData: FlTitlesData(show: false),
-                    gridData: FlGridData(show: false),
-                    borderData: FlBorderData(show: false),
-                    lineBarsData: [
-                      LineChartBarData(
-                        spots: const [
-                          FlSpot(0, 1),
-                          FlSpot(1, 2),
-                          FlSpot(2, 1.3),
-                          FlSpot(3, 1.3),
-                          FlSpot(4, 2),
-                        ],
-                        isCurved: true,
-                        color: Colors.white24,
-                        dotData: FlDotData(
-                          show: true,
-                          getDotPainter: (spot, percent, barData, index) =>
-                              FlDotCirclePainter(
-                            radius: 4,
-                            color: Colors.white70,
-                            strokeWidth: 0,
-                          ),
-                        ),
-                        barWidth: 2,
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       );
     });

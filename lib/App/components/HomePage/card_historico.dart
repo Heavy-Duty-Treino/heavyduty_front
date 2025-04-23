@@ -16,29 +16,55 @@ class _CardHistoricoState extends State<CardHistorico> {
     controller.GetHistoryUser();
     return Obx(
       () => Card(
-        color: Colors.blueAccent,
+        color: const Color.fromARGB(255, 0, 7, 44),
         child: SizedBox(
           height: 300,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Text('Card Historico'),
-                  Icon(Icons.history, color: Colors.white)
-                ],
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Card Historico',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Icon(Icons.history, color: Colors.white)
+                  ],
+                ),
               ),
               Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${controller.trainCounts}',
-                        textAlign: TextAlign.left,
-                      ),
-                      Text("Treinos registrados")
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${controller.trainCounts}',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          "Treinos registrados",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               )

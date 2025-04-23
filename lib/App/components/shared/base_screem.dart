@@ -27,13 +27,13 @@ class _BaseScreemState extends State<BaseScreem> {
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(140),
           child: Container(
-            margin: const EdgeInsets.only(top: 90),
+            margin: const EdgeInsets.only(top: 30),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(100),
                     child: FutureBuilder<String>(
                       future: _controller.getImage(),
                       builder: (context, snapshot) {
@@ -49,7 +49,14 @@ class _BaseScreemState extends State<BaseScreem> {
                           return Icon(Icons.account_circle, size: 50);
                         }
 
-                        return Image.network(snapshot.data!);
+                        return SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.network(
+                            snapshot.data!,
+                            fit: BoxFit.cover,
+                          ),
+                        );
                       },
                     ),
                   ),

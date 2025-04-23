@@ -17,7 +17,7 @@ class _CardFrequenciaState extends State<CardFrequencia> {
 
   // Constantes e estilos
   static const _maxY = 10.0;
-  static const _cardColor = Colors.blueAccent;
+  static const _cardColor = const Color.fromARGB(255, 0, 7, 44);
   static const _textStyle = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.bold,
@@ -45,30 +45,40 @@ class _CardFrequenciaState extends State<CardFrequencia> {
         color: _cardColor,
         child: Container(
           padding: const EdgeInsets.all(8),
-          child: BarChart(
-            BarChartData(
-              barGroups: controller.barData,
-              borderData: FlBorderData(show: false),
-              gridData: const FlGridData(show: false),
-              barTouchData: BarTouchData(enabled: false),
-              titlesData: const FlTitlesData(
-                show: true,
-                leftTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                rightTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                topTitles:
-                    AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: getTitles,
+          child: Stack(children: [
+            Text(
+              "Frequencia",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            BarChart(
+              BarChartData(
+                barGroups: controller.barData,
+                borderData: FlBorderData(show: false),
+                gridData: const FlGridData(show: false),
+                barTouchData: BarTouchData(enabled: false),
+                titlesData: const FlTitlesData(
+                  show: true,
+                  leftTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  rightTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  topTitles:
+                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  bottomTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      getTitlesWidget: getTitles,
+                    ),
                   ),
                 ),
+                maxY: _maxY,
               ),
-              maxY: _maxY,
             ),
-          ),
+          ]),
         ),
       );
     });
