@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:heavyduty_front/App/components/shared/InputField.dart';
+import 'package:heavyduty_front/App/interactor/controllers/criarContaController.dart';
 
 class CriarConta extends StatelessWidget {
   const CriarConta({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CriarContaController controller = Get.put(CriarContaController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Criar Conta'),
@@ -21,39 +26,34 @@ class CriarConta extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Nome',
-                border: OutlineInputBorder(),
-              ),
+            InputField(
+              textEditingController: controller.username,
+              hintText: 'Nome',
+              obscureText: false,
             ),
             const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'E-mail',
-                border: OutlineInputBorder(),
-              ),
+            InputField(
+              textEditingController: controller.email,
+              hintText: 'E-mail',
+              obscureText: false,
             ),
             const SizedBox(height: 16),
-            const TextField(
+            InputField(
+              textEditingController: controller.password,
+              hintText: 'Senha',
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Senha',
-                border: OutlineInputBorder(),
-              ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+            InputField(
+              textEditingController: controller.confirmPassword,
+              hintText: 'Confirme a senha',
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Confirmar Senha',
-                border: OutlineInputBorder(),
-              ),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
-                // Ação ao criar conta
+                // Ação ao criar cont
+                controller.criarConta();
               },
               child: const Text('Criar Conta'),
             ),
