@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
+import 'package:heavyduty_front/App/interactor/services/SharedServices.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserServices {
-  final urlDefalult = "https://heavyduty-back-1.onrender.com/api/usuario/";
+  final Sharedservices sharedservices = Sharedservices();
+  final urlDefault = '${Sharedservices().url}/api/usuario/';
   final dio = Dio();
 
   Future<String?> GetEmail() async {
@@ -16,26 +18,26 @@ class UserServices {
 
   Future<Response<dynamic>> getChartData() async {
     var email = await GetEmail();
-    final response = await dio.get('${urlDefalult}chartvolumedata/$email');
+    final response = await dio.get('${urlDefault}chartvolumedata/$email');
     return response;
   }
 
   Future<Response<dynamic>> getBarData() async {
     var email = await GetEmail();
-    final response = await dio.get('${urlDefalult}chartHistoryData/$email');
+    final response = await dio.get('${urlDefault}chartHistoryData/$email');
     return response;
   }
 
   Future<Response<dynamic>> getAverageHours() async {
     var email = await GetEmail();
-    final response = await dio.get('${urlDefalult}AverageHours/$email');
+    final response = await dio.get('${urlDefault}AverageHours/$email');
     return response;
   }
 
   Future<Response<dynamic>> GetUserTrainingHistory() async {
     var email = await GetEmail();
     final response =
-        await dio.get('${urlDefalult}GetUserTrainingHistory/$email');
+        await dio.get('${urlDefault}GetUserTrainingHistory/$email');
     return response;
   }
 }
