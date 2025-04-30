@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:heavyduty_front/App/interactor/services/SharedServices.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
 
 class ExercicioServices {
-  final urlDefault = 'http://192.168.1.64:5126/api/exercicio';
+  final Sharedservices sharedservices = Sharedservices();
+  final urlDefault = '${Sharedservices().url}/api/exercicio';
   final dio = Dio();
 
   Future<List<ExercicioModel>> getAll() async {

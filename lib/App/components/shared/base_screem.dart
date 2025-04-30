@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class BaseScreem extends StatefulWidget {
   final Widget body;
@@ -15,25 +17,46 @@ class BaseScreem extends StatefulWidget {
 }
 
 class _BaseScreemState extends State<BaseScreem> {
+  int _getIndexFromRoute(BuildContext context) {
+    final currentPath = ModalRoute.of(context)?.settings.name;
+
+    switch (currentPath) {
+      case '/home':
+        return 0; // Home
+      case '/treino':
+        return 1; // Treino
+      default:
+        return 0; // Padrão, se não encontrar, assume Home
+    }
+  }
+
   void _onTapNavigation(int index) {
     if (index == 0) Routefly.navigate(routePaths.home);
     if (index == 1) Routefly.navigate(routePaths.treino);
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    initializeDateFormatting('pt_BR', null);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final LoginPageController _controller = Get.find<LoginPageController>();
+    var currentIndex = _getIndexFromRoute(context);
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(140),
           child: Container(
-            margin: const EdgeInsets.only(top: 90),
+            margin: const EdgeInsets.only(top: 30),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(100),
                     child: FutureBuilder<String>(
                       future: _controller.getImage(),
                       builder: (context, snapshot) {
@@ -49,7 +72,14 @@ class _BaseScreemState extends State<BaseScreem> {
                           return Icon(Icons.account_circle, size: 50);
                         }
 
-                        return Image.network(snapshot.data!);
+                        return SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: Image.network(
+                            snapshot.data!,
+                            fit: BoxFit.cover,
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -74,7 +104,9 @@ class _BaseScreemState extends State<BaseScreem> {
                             }),
                         Padding(
                           padding: EdgeInsets.only(top: 8),
-                          child: Text('Terca Feira, 01 Outubro'),
+                          child: Text(
+                            '${toBeginningOfSentenceCase(DateFormat.EEEE('pt_BR').format(DateTime.now()))}, ${DateFormat('dd MMMM', 'pt_BR').format(DateTime.now())}',
+                          ),
                         )
                       ],
                     ),
@@ -86,20 +118,14 @@ class _BaseScreemState extends State<BaseScreem> {
       body: widget.body,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
-        fixedColor: const Color.fromARGB(115, 255, 255, 255),
+        currentIndex: currentIndex,
+        selectedItemColor: Colors.white, // cor do item selecionado
+        unselectedItemColor:
+            Color.fromARGB(255, 112, 112, 112), // cor dos outros
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Color.fromARGB(255, 112, 112, 112),
-              ),
-              label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.note_alt_rounded,
-                color: Color.fromARGB(255, 112, 112, 112),
-              ),
-              label: 'Treino')
+              icon: Icon(Icons.fitness_center), label: 'Treino')
         ],
         onTap: _onTapNavigation,
       ),

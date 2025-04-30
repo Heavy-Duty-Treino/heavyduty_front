@@ -23,17 +23,45 @@ class _CardVolumeState extends State<CardVolume> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.indigo[900],
+      color: const Color.fromARGB(255, 0, 7, 44),
       child: Container(
-          height: 300,
-          child: Column(
-            children: [
-              Expanded(
-                child: PieChart(PieChartData(
-                    centerSpaceRadius: 0, sections: _controller.sectionVolume)),
+        height: 300,
+        child: Obx(() {
+          if (_controller.isLoading.value) {
+            return Column(
+              children: [
+                Text(
+                  "Volume",
+                ),
+                Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            );
+          }
+          return Stack(children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                "Volume",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
-            ],
-          )),
+            ),
+            PieChart(
+              PieChartData(
+                centerSpaceRadius: 0,
+                sections: _controller.sectionVolume,
+              ),
+            )
+          ]);
+        }),
+      ),
     );
   }
 }

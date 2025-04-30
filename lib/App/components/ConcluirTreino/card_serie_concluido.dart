@@ -36,11 +36,6 @@ class _CardSerieConcluidoState extends State<CardSerieConcluido> {
                     label: Text(
                   "Repetições",
                   style: TextStyle(color: Colors.white),
-                )),
-                DataColumn(
-                    label: Icon(
-                  Icons.verified,
-                  color: Colors.white,
                 ))
               ],
               rows: List<DataRow>.generate(
@@ -70,10 +65,6 @@ class _CardSerieConcluidoState extends State<CardSerieConcluido> {
                           _controller.addSerieValue(widget.idExercicio, null,
                               index, null, int.tryParse(value));
                         },
-                      )),
-                      DataCell(Checkbox(
-                        value: true,
-                        onChanged: (bool? value) {},
                       ))
                     ],
                   );

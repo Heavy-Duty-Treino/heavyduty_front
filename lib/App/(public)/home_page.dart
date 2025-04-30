@@ -16,45 +16,86 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final cardHeight = screenHeight * 0.33; // 25% da altura da tela
+
     return BaseScreem(
-        title: 'Home Page',
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-              padding: EdgeInsets.only(left: 15), child: Text("Sua Atividade")),
-          Row(
+      title: 'Home Page',
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                  child: Padding(
-                      padding:
-                          EdgeInsets.only(left: 8, top: 8, bottom: 4, right: 4),
-                      child: CardVolume())),
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 4, top: 8, bottom: 4, right: 8),
-                  child: CardFrequencia(),
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 8, top: 4, bottom: 8, right: 4),
-                  child: CardDuracao(),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, top: 8),
+                child: Text(
+                  "Sua Atividade",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: 4, top: 4, bottom: 8, right: 8),
-                  child: CardHistorico(),
-                ),
-              )
+              const SizedBox(height: 8),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: SizedBox(
+                                height: cardHeight,
+                                child: const CardVolume(),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: SizedBox(
+                                height: cardHeight,
+                                child: const CardFrequencia(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: SizedBox(
+                                height: cardHeight,
+                                child: const CardDuracao(),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: SizedBox(
+                                height: cardHeight,
+                                child: const CardHistorico(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 8),
             ],
-          )
-        ]));
+          ),
+        ),
+      ),
+    );
   }
 }

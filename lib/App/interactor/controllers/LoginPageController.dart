@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:heavyduty_front/App/components/HomePage/card_frequencia.dart';
 import 'package:heavyduty_front/App/interactor/services/login_services.dart';
 import 'package:heavyduty_front/App/interactor/services/models/Login_model.dart';
 import 'package:heavyduty_front/App/interactor/services/user_services.dart';
@@ -11,22 +12,39 @@ import 'package:routefly/routefly.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPageController extends GetxController {
-  var userServices = UserServices();
-  LoginServices services = LoginServices();
-  TextEditingController emailInput = TextEditingController();
-  TextEditingController passwordInput = TextEditingController();
-  var chatData = Rxn<dynamic>();
-  var sectionVolume = <PieChartSectionData>[].obs;
+  // Serviços
+  final userServices = UserServices();
+  final services = LoginServices();
 
+  // Controllers
+  final emailInput = TextEditingController();
+  final passwordInput = TextEditingController();
+
+  // Estados reativos
+  final chatData = Rxn<dynamic>();
+  final barData = <BarChartGroupData>[].obs;
+  final sectionVolume = <PieChartSectionData>[].obs;
+  final isLoading = false.obs;
+  final average = 0.0.obs;
+  final trainCounts = 0.obs;
+
+  // Constantes
+  static const _gradientColors = [Colors.cyan, Colors.cyanAccent];
+  static const _gradientBegin = Alignment.bottomCenter;
+  static const _gradientEnd = Alignment.topCenter;
+
+  // ================ Métodos de Autenticação ================
   void authenticate() async {
-    var user = new Login(
-        email: emailInput.value.text, password: passwordInput.value.text);
+    final user =
+        Login(email: emailInput.value.text, password: passwordInput.value.text);
+
     try {
-      var auth = await services.authenticate(user);
-      saveToken(auth.token, emailInput.value.text, auth.usuario.imageUrl,
+      final auth = await services.authenticate(user);
+      await saveToken(auth.token, emailInput.value.text, auth.usuario.imageUrl,
           auth.usuario.nomeUsuario);
+
       if (auth.data == 'Usuario Autenticado') {
-        setChatData();
+        await loadData();
         Routefly.navigate(routePaths.home);
       }
     } catch (e) {
@@ -35,19 +53,21 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> saveToken(
-      String userToken, String name, String image, String nome) async {
+      String userToken, String email, String image, String nome) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("authUserToken", userToken);
-    await prefs.setString("authUserEmail", name);
-    await prefs.setString("userImage", image);
-    await prefs.setString("userName", nome);
+    await Future.wait([
+      prefs.setString("authUserToken", userToken),
+      prefs.setString("authUserEmail", email),
+      prefs.setString("userImage", image),
+      prefs.setString("userName", nome),
+    ]);
   }
 
+  // ================ Métodos de Dados do Usuário ================
   Future<String> getEmail() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      String? email = prefs.getString("authUserEmail");
-
+      final email = prefs.getString("authUserEmail");
       return (email != null && email.isNotEmpty)
           ? email
           : "Usuario desconhecido";
@@ -65,9 +85,7 @@ class LoginPageController extends GetxController {
   Future<String> getName() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      String? nome = prefs.getString("userName");
-
-      // Retorna o nome se não for nulo e não estiver vazio, senão retorna um valor padrão
+      final nome = prefs.getString("userName");
       return (nome != null && nome.isNotEmpty) ? nome : "Usuário desconhecido";
     } catch (e) {
       debugPrint("Erro ao obter o nome do usuário: $e");
@@ -77,74 +95,176 @@ class LoginPageController extends GetxController {
 
   Future<String> getImage() async {
     final prefs = await SharedPreferences.getInstance();
-    var image = prefs.getString("userImage");
-    if (image == null || image.isEmpty) {
-      return "https://via.placeholder.com/150"; // Uma imagem padrão
+    final image = prefs.getString("userImage");
+    return (image == null || image.isEmpty)
+        ? "https://via.placeholder.com/150"
+        : image;
+  }
+
+  // ================ Métodos de Carregamento de Dados ================
+  Future<void> loadData() async {
+    await Future.wait([
+      setChatData(),
+      setBarData(),
+    ]);
+  }
+
+  Future<void> setChatData() async {
+    try {
+      isLoading.value = true;
+      await preloadImages();
+      final response = await userServices.getChartData();
+      chatData.value = response.data;
+      generateFixedPieChartSections(chatData);
+    } catch (e) {
+      log("Erro ao carregar dados do gráfico: ", error: e);
+    } finally {
+      isLoading.value = false;
     }
-    return image;
   }
 
-  void setChatData() async {
-    final response = await userServices.getChartData();
-    chatData.value = response.data;
-    generateFixedPieChartSections(chatData);
+  Future<void> setBarData() async {
+    try {
+      isLoading.value = true;
+      debugPrint('Iniciando setBarData...');
+      debugPrint('Chamando userServices.getBarData()...');
+
+      final response = await userServices.getBarData();
+      debugPrint('Resposta recebida do getBarData: ${response.data}');
+      debugPrint('Tipo da resposta: ${response.data.runtimeType}');
+
+      barData.value = getBarGroups(response.data);
+      debugPrint(
+          'BarData atualizado com sucesso. Quantidade de elementos: ${barData.length}');
+    } catch (e) {
+      log("Erro ao carregar dados do gráfico: ", error: e);
+      debugPrint('Erro detalhado: $e');
+    } finally {
+      isLoading.value = false;
+      debugPrint('setBarData finalizado');
+    }
   }
 
+  // ================ Métodos de Pré-carregamento ================
+  Future<void> preloadImages() async {
+    try {
+      await Future.wait([
+        precacheImage(AssetImage("assets/costas.png"), Get.context!),
+        precacheImage(AssetImage("assets/peitoral.jpg"), Get.context!),
+        precacheImage(AssetImage("assets/quadriceps.jpg"), Get.context!),
+        precacheImage(AssetImage("assets/posterior.jpg"), Get.context!),
+      ]);
+    } catch (e) {
+      log("Erro ao pré-carregar imagens: ", error: e);
+    }
+  }
+
+  // ================ Métodos de Geração de Gráficos ================
   void generateFixedPieChartSections(Rxn<dynamic> data) {
-    var costas = data.value['costas'];
-    var peito = data.value['peito'];
-    var quadriceps = data.value['quadriceps'];
-    var posterior = data.value['posterior'];
+    final costas = data.value['costas'];
+    final peito = data.value['peito'];
+    final quadriceps = data.value['quadriceps'];
+    final posterior = data.value['posterior'];
 
     sectionVolume.assignAll([
-      PieChartSectionData(
-          value: costas.toDouble(),
-          color: Colors.purple,
-          radius: 70,
-          showTitle: false,
-          badgeWidget: ClipOval(
-              child: Image.asset(
-            "assets/costas.png",
-            height: 30,
-            fit: BoxFit.cover,
-          )),
-          badgePositionPercentageOffset: 1),
-      PieChartSectionData(
-          value: peito.toDouble(),
-          color: Colors.blue,
-          radius: 70,
-          showTitle: false,
-          badgeWidget: ClipOval(
-              child: Image.asset(
-            "assets/peitoral.jpg",
-            height: 30,
-            fit: BoxFit.cover,
-          )),
-          badgePositionPercentageOffset: 1),
-      PieChartSectionData(
-          value: quadriceps.toDouble(),
-          color: Colors.orange,
-          radius: 70,
-          showTitle: false,
-          badgeWidget: ClipOval(
-              child: Image.asset(
-            "assets/quadriceps.jpg",
-            height: 30,
-            fit: BoxFit.cover,
-          )),
-          badgePositionPercentageOffset: 1),
-      PieChartSectionData(
-          value: posterior.toDouble(),
-          color: Colors.green,
-          radius: 70,
-          showTitle: false,
-          badgeWidget: ClipOval(
-              child: Image.asset(
-            "assets/posterior.jpg",
-            height: 30,
-            fit: BoxFit.cover,
-          )),
-          badgePositionPercentageOffset: 1),
+      _createPieSection(costas, Colors.purple, "assets/costas.png"),
+      _createPieSection(peito, Colors.blue, "assets/peitoral.jpg"),
+      _createPieSection(quadriceps, Colors.orange, "assets/quadriceps.jpg"),
+      _createPieSection(posterior, Colors.green, "assets/posterior.jpg"),
     ]);
+  }
+
+  PieChartSectionData _createPieSection(
+      dynamic value, Color color, String assetPath) {
+    return PieChartSectionData(
+      value: value.toDouble(),
+      color: color,
+      radius: 70,
+      showTitle: false,
+      badgeWidget: ClipOval(
+        child: Image.asset(
+          assetPath,
+          height: 30,
+          width: 30,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Icon(Icons.error, color: Colors.red);
+          },
+        ),
+      ),
+      badgePositionPercentageOffset: 1,
+    );
+  }
+
+  List<BarChartGroupData> getBarGroups(Map<String, dynamic> dadosFrequencia) {
+    final now = DateTime.now();
+    final currentMonth = now.month - 1;
+    List<BarChartGroupData> groups = [];
+
+    for (int i = 0; i < 6; i++) {
+      final monthIndex = (currentMonth - (5 - i)) % 12;
+      final monthName = _getMonthName(monthIndex);
+      final value = dadosFrequencia[monthName.toLowerCase()] ?? 0;
+
+      groups.add(
+        BarChartGroupData(
+          x: i,
+          barRods: [
+            BarChartRodData(
+              toY: value.toDouble(),
+              gradient: LinearGradient(
+                colors: _gradientColors,
+                begin: _gradientBegin,
+                end: _gradientEnd,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return groups;
+  }
+
+  Future<void> GetAverageHours() async {
+    var response = await userServices.getAverageHours();
+    average.value = response.data;
+  }
+
+  Future<void> GetHistoryUser() async {
+    var response = await userServices.GetUserTrainingHistory();
+    trainCounts.value = response.data;
+  }
+
+  // ================ Métodos Auxiliares ================
+  String _getMonthName(int monthIndex) {
+    switch (monthIndex) {
+      case 0:
+        return 'janeiro';
+      case 1:
+        return 'fevereiro';
+      case 2:
+        return 'marco';
+      case 3:
+        return 'abril';
+      case 4:
+        return 'maio';
+      case 5:
+        return 'junho';
+      case 6:
+        return 'julho';
+      case 7:
+        return 'agosto';
+      case 8:
+        return 'setembro';
+      case 9:
+        return 'outubro';
+      case 10:
+        return 'novembro';
+      case 11:
+        return 'dezembro';
+      default:
+        return '';
+    }
   }
 }
