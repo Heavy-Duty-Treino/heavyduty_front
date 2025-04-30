@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -35,7 +36,24 @@ class LoginPage extends StatelessWidget {
               title: "Entrar",
               ph: 48,
               pv: 10,
-              onPressed: () => controller.authenticate())
+              onPressed: () => controller.authenticate()),
+          RichText(
+              text: TextSpan(
+            text: "Não tem uma conta?",
+            children: [
+              TextSpan(
+                text: " Cadastre-se",
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Routefly.push(routePaths.criarConta);
+                  },
+              )
+            ],
+          ))
         ],
       ),
     );
