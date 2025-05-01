@@ -227,8 +227,15 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> GetAverageHours() async {
-    var response = await userServices.getAverageHours();
-    average.value = response.data;
+    try {
+      var response = await userServices.getAverageHours();
+      average.value = (response.data is int)
+          ? (response.data as int).toDouble()
+          : response.data as double;
+    } catch (e) {
+      log("Erro ao obter horas médias: ", error: e);
+      average.value = 0.0;
+    }
   }
 
   Future<void> GetHistoryUser() async {
