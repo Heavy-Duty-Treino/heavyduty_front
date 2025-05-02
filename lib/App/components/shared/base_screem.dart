@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:heavyduty_front/App/components/shared/base_header.dart';
+import 'package:heavyduty_front/App/components/shared/headerUsuario.dart';
 import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
@@ -25,6 +27,8 @@ class _BaseScreemState extends State<BaseScreem> {
         return 0; // Home
       case '/treino':
         return 1; // Treino
+      case '/usuario':
+        return 2; // Usuario
       default:
         return 0; // Padrão, se não encontrar, assume Home
     }
@@ -33,6 +37,7 @@ class _BaseScreemState extends State<BaseScreem> {
   void _onTapNavigation(int index) {
     if (index == 0) Routefly.navigate(routePaths.home);
     if (index == 1) Routefly.navigate(routePaths.treino);
+    if (index == 2) Routefly.navigate(routePaths.usuario);
   }
 
   @override
@@ -46,86 +51,38 @@ class _BaseScreemState extends State<BaseScreem> {
   Widget build(BuildContext context) {
     final LoginPageController _controller = Get.find<LoginPageController>();
     var currentIndex = _getIndexFromRoute(context);
+
+    // Verifica se está na página "usuario"
+    final isUsuarioPage = ModalRoute.of(context)?.settings.name == '/usuario';
+
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(140),
-          child: Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: FutureBuilder<String>(
-                      future: _controller.getImage(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return CircularProgressIndicator();
-                        }
-                        if (snapshot.hasError) {
-                          return Text("Erro ao carregar imagem");
-                        }
-
-                        if (snapshot.data == null || snapshot.data!.isEmpty) {
-                          return Icon(Icons.account_circle, size: 50);
-                        }
-
-                        return SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Image.network(
-                            snapshot.data!,
-                            fit: BoxFit.cover,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FutureBuilder<String>(
-                            future: _controller.getName(),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return CircularProgressIndicator();
-                              }
-                              if (snapshot.hasError) {
-                                return Text("Erro ao buscar nome");
-                              }
-                              debugPrint(snapshot.data);
-                              return Text(snapshot.data!);
-                            }),
-                        Padding(
-                          padding: EdgeInsets.only(top: 8),
-                          child: Text(
-                            '${toBeginningOfSentenceCase(DateFormat.EEEE('pt_BR').format(DateTime.now()))}, ${DateFormat('dd MMMM', 'pt_BR').format(DateTime.now())}',
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+        preferredSize: isUsuarioPage
+            ? const Size.fromHeight(200) // Altura maior para BaseHeaderUsuario
+            : const Size.fromHeight(140), // Altura padrão para BaseHeader
+        child: isUsuarioPage
+            ? BaseHeaderUsuario(
+                getImage: _controller.getImage,
+                getName: _controller.getName,
+              )
+            : BaseHeader(
+                getImage: _controller.getImage,
+                getName: _controller.getName,
               ),
-            ),
-          )),
+      ),
       body: widget.body,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         currentIndex: currentIndex,
         selectedItemColor: Colors.white, // cor do item selecionado
         unselectedItemColor:
-            Color.fromARGB(255, 112, 112, 112), // cor dos outros
+            const Color.fromARGB(255, 112, 112, 112), // cor dos outros
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.fitness_center), label: 'Treino')
+              icon: Icon(Icons.fitness_center), label: 'Treino'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Configurações'),
         ],
         onTap: _onTapNavigation,
       ),
