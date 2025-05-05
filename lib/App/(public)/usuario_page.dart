@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:heavyduty_front/App/components/shared/base_screem.dart';
+import 'package:heavyduty_front/App/interactor/controllers/usuarioController.dart';
+import 'package:heavyduty_front/routes.g.dart';
+import 'package:routefly/routefly.dart';
 
 class UsuarioPage extends StatelessWidget {
   const UsuarioPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final UsuarioController _controller = UsuarioController();
     const _cardColor = const Color.fromARGB(255, 0, 7, 44);
 
     return BaseScreem(
       title: 'Usuario',
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           // Card: Editar Perfil
           Card(
@@ -66,6 +70,10 @@ class UsuarioPage extends StatelessWidget {
               ),
               onTap: () {
                 // Lógica para logout
+                _controller.Logout().then((_) {
+                  // Redireciona para a página de login após o logout
+                  Routefly.navigate(routePaths.login);
+                });
               },
             ),
           ),

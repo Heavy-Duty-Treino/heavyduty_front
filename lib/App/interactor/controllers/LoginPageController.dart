@@ -97,7 +97,7 @@ class LoginPageController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     final image = prefs.getString("userImage");
     return (image == null || image.isEmpty)
-        ? "https://via.placeholder.com/150"
+        ? "https://fakeimg.pl/100x100"
         : image;
   }
 

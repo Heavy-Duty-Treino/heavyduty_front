@@ -64,7 +64,7 @@ class _BaseScreemState extends State<BaseScreem> {
             ? BaseHeaderUsuario(
                 getImage: _controller.getImage,
                 getName: _controller.getName,
-              )
+                getEmail: _controller.getEmail)
             : BaseHeader(
                 getImage: _controller.getImage,
                 getName: _controller.getName,

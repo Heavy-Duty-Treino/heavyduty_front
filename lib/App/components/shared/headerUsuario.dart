@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class BaseHeaderUsuario extends StatelessWidget {
   final Future<String> Function() getImage;
   final Future<String> Function() getName;
+  final Future<String> Function() getEmail;
 
   const BaseHeaderUsuario({
     super.key,
     required this.getImage,
     required this.getName,
+    required this.getEmail,
   });
 
   @override
@@ -45,7 +47,6 @@ class BaseHeaderUsuario extends StatelessWidget {
               },
             ),
           ),
-          // Nome do usuário
           FutureBuilder<String>(
             future: getName(),
             builder: (context, snapshot) {
@@ -65,6 +66,25 @@ class BaseHeaderUsuario extends StatelessWidget {
               );
             },
           ),
+          FutureBuilder<String>(
+            future: getEmail(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              }
+              if (snapshot.hasError) {
+                return const Text("Erro ao buscar nome");
+              }
+              return Text(
+                snapshot.data!,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              );
+            },
+          )
         ],
       ),
     );
