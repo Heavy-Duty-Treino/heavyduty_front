@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
 
 class CardHistoricoPage extends StatelessWidget {
-  const CardHistoricoPage({super.key});
+  final String title;
+  final String image;
+  final String data;
+  final String nameUser;
+  final String profileImage;
+  final String nameExercise;
+  final String muscleTarget;
+  final String muscleSynergist;
+  final String equipment;
+  final String restTime;
+
+  const CardHistoricoPage(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.data,
+      required this.nameUser,
+      required this.profileImage,
+      required this.nameExercise,
+      required this.muscleTarget,
+      required this.muscleSynergist,
+      required this.equipment,
+      required this.restTime});
 
   @override
   Widget build(BuildContext context) {
