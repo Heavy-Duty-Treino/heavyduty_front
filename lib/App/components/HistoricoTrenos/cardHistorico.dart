@@ -10,7 +10,7 @@ class CardHistoricoPage extends StatelessWidget {
   final String muscleTarget;
   final String muscleSynergist;
   final String equipment;
-  final String restTime;
+  final int restTime;
 
   const CardHistoricoPage(
       {super.key,
@@ -43,10 +43,10 @@ class CardHistoricoPage extends StatelessWidget {
                   Text("Nome do Usuário"),
                 ],
               ),
-              Text("Data"),
+              Text(data),
             ],
           ),
-          Text("Titulo"),
+          Text(title),
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -56,42 +56,44 @@ class CardHistoricoPage extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text("Supino reto"),
+              Text(nameExercise),
               const SizedBox(
                 height: 12,
               ),
               RichText(
-                  text: const TextSpan(children: [
-                TextSpan(
+                  text: TextSpan(children: [
+                const TextSpan(
                     text: "Musculo Alvo: ",
                     style: TextStyle(color: Colors.white)),
                 TextSpan(
-                    text: "Peito", style: TextStyle(color: Colors.lightBlue))
+                    text: muscleTarget,
+                    style: const TextStyle(color: Colors.lightBlue))
               ])),
               RichText(
-                  text: const TextSpan(children: [
-                TextSpan(
+                  text: TextSpan(children: [
+                const TextSpan(
                     text: "Musculo Sinergista: ",
                     style: TextStyle(color: Colors.white)),
                 TextSpan(
-                    text: "Ombros e Triceps",
-                    style: TextStyle(color: Colors.lightBlue))
+                    text: muscleSynergist,
+                    style: const TextStyle(color: Colors.lightBlue))
               ])),
               RichText(
-                  text: const TextSpan(children: [
-                TextSpan(
+                  text: TextSpan(children: [
+                const TextSpan(
                     text: "Equipamento: ",
                     style: TextStyle(color: Colors.white)),
                 TextSpan(
-                    text: "Halteres", style: TextStyle(color: Colors.lightBlue))
+                    text: equipment,
+                    style: const TextStyle(color: Colors.lightBlue))
               ])),
               RichText(
-                  text: const TextSpan(children: [
-                TextSpan(
+                  text: TextSpan(children: [
+                const TextSpan(
                     text: "Descanso: ", style: TextStyle(color: Colors.white)),
                 TextSpan(
-                    text: "120 Segundos",
-                    style: TextStyle(color: Colors.lightBlue))
+                    text: restTime.toString(),
+                    style: const TextStyle(color: Colors.lightBlue))
               ])),
               Container(
                   width: double.infinity,
