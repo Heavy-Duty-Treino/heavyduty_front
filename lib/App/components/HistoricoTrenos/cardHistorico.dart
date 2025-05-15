@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
 
 class CardHistoricoPage extends StatelessWidget {
   final String title;
@@ -10,6 +11,7 @@ class CardHistoricoPage extends StatelessWidget {
   final String muscleTarget;
   final String muscleSynergist;
   final String equipment;
+  final List<Exercicio> exercices;
   final int restTime;
 
   const CardHistoricoPage(
@@ -23,7 +25,8 @@ class CardHistoricoPage extends StatelessWidget {
       required this.muscleTarget,
       required this.muscleSynergist,
       required this.equipment,
-      required this.restTime});
+      required this.restTime,
+      required this.exercices});
 
   @override
   Widget build(BuildContext context) {
@@ -47,64 +50,46 @@ class CardHistoricoPage extends StatelessWidget {
             ],
           ),
           Text(title),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.grey[900]),
-            padding: const EdgeInsets.all(16),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(nameExercise),
-              const SizedBox(
-                height: 12,
-              ),
-              RichText(
-                  text: TextSpan(children: [
-                const TextSpan(
-                    text: "Musculo Alvo: ",
-                    style: TextStyle(color: Colors.white)),
-                TextSpan(
-                    text: muscleTarget,
-                    style: const TextStyle(color: Colors.lightBlue))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                const TextSpan(
-                    text: "Musculo Sinergista: ",
-                    style: TextStyle(color: Colors.white)),
-                TextSpan(
-                    text: muscleSynergist,
-                    style: const TextStyle(color: Colors.lightBlue))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                const TextSpan(
-                    text: "Equipamento: ",
-                    style: TextStyle(color: Colors.white)),
-                TextSpan(
-                    text: equipment,
-                    style: const TextStyle(color: Colors.lightBlue))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                const TextSpan(
-                    text: "Descanso: ", style: TextStyle(color: Colors.white)),
-                TextSpan(
-                    text: restTime.toString(),
-                    style: const TextStyle(color: Colors.lightBlue))
-              ])),
-              Container(
-                  width: double.infinity,
-                  height: 200,
+          SizedBox(
+            height: 300,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: exercices.length,
+              itemBuilder: (context, index) {
+                final exercicio = exercices[index];
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.only(right: 12),
+                  padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.grey[850],
+                    borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                  ))
-            ]),
-          )
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        exercicio.nomeExercicio,
+                        style: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 8),
+                      Text("Musculo Alvo: ${exercicio.musculoAlvo}",
+                          style: const TextStyle(color: Colors.white)),
+                      Text(
+                          "Sinergistas: ${exercicio.musculosSinergistas.join(', ')}",
+                          style: const TextStyle(color: Colors.white)),
+                      Text("Equipamento: ${exercicio.tipoExercicio}",
+                          style: const TextStyle(color: Colors.white)),
+                      Text("Descanso: ${exercicio.descansoSegundos}s",
+                          style: const TextStyle(color: Colors.white)),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

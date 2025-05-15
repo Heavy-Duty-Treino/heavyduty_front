@@ -31,6 +31,7 @@ class HisoticoPage extends StatelessWidget {
                 nameUser: treinos.nomeUsuario,
                 profileImage: treinos.fotoPerfilUsuario,
                 restTime: treinos.duracao,
+                exercices: treinos.exercicios,
               );
             });
       }),
