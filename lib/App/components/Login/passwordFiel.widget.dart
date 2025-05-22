@@ -10,7 +10,7 @@ class passwordField extends StatelessWidget {
     final LoginPageController controller = Get.put(LoginPageController());
     return TextField(
       controller: controller.passwordInput,
-      decoration: InputDecoration(hintText: "Senha"),
+      decoration: const InputDecoration(hintText: "Senha"),
     );
   }
 }

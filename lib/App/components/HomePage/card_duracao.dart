@@ -32,8 +32,8 @@ class _CardDuracaoState extends State<CardDuracao> {
     return Obx(() {
       if (controller.average.value == 0) {
         // Não tem treino na semana
-        return Card(
-          color: const Color.fromARGB(255, 0, 7, 44),
+        return const Card(
+          color: Color.fromARGB(255, 0, 7, 44),
           child: SizedBox(
             height: 300,
             child: Column(
@@ -66,8 +66,8 @@ class _CardDuracaoState extends State<CardDuracao> {
         color: const Color.fromARGB(255, 0, 7, 44),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
+            const Padding(
+              padding: EdgeInsets.all(10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -86,7 +86,7 @@ class _CardDuracaoState extends State<CardDuracao> {
             const SizedBox(height: 12),
             Text(
               formatTime(controller.average),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -96,8 +96,8 @@ class _CardDuracaoState extends State<CardDuracao> {
             Expanded(
               child: LineChart(
                 LineChartData(
-                  titlesData: FlTitlesData(show: false),
-                  gridData: FlGridData(show: false),
+                  titlesData: const FlTitlesData(show: false),
+                  gridData: const FlGridData(show: false),
                   borderData: FlBorderData(show: false),
                   lineBarsData: [
                     LineChartBarData(

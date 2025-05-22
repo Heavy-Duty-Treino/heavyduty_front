@@ -14,8 +14,8 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(
-        const Duration(seconds: 4), () => Routefly.navigate(routePaths.login));
+    Future.delayed(const Duration(seconds: 4),
+        () => Routefly.navigate(routePaths.historico));
   }
 
   @override

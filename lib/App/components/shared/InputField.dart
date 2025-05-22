@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:heavyduty_front/App/interactor/controllers/LoginPageController.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController textEditingController;

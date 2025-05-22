@@ -149,10 +149,10 @@ class LoginPageController extends GetxController {
   Future<void> preloadImages() async {
     try {
       await Future.wait([
-        precacheImage(AssetImage("assets/costas.png"), Get.context!),
-        precacheImage(AssetImage("assets/peitoral.jpg"), Get.context!),
-        precacheImage(AssetImage("assets/quadriceps.jpg"), Get.context!),
-        precacheImage(AssetImage("assets/posterior.jpg"), Get.context!),
+        precacheImage(const AssetImage("assets/costas.png"), Get.context!),
+        precacheImage(const AssetImage("assets/peitoral.jpg"), Get.context!),
+        precacheImage(const AssetImage("assets/quadriceps.jpg"), Get.context!),
+        precacheImage(const AssetImage("assets/posterior.jpg"), Get.context!),
       ]);
     } catch (e) {
       log("Erro ao pré-carregar imagens: ", error: e);
@@ -188,7 +188,7 @@ class LoginPageController extends GetxController {
           width: 30,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
-            return Icon(Icons.error, color: Colors.red);
+            return const Icon(Icons.error, color: Colors.red);
           },
         ),
       ),
@@ -212,7 +212,7 @@ class LoginPageController extends GetxController {
           barRods: [
             BarChartRodData(
               toY: value.toDouble(),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: _gradientColors,
                 begin: _gradientBegin,
                 end: _gradientEnd,

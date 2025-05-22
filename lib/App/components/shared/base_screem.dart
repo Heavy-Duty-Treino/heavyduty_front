@@ -49,7 +49,7 @@ class _BaseScreemState extends State<BaseScreem> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginPageController _controller = Get.find<LoginPageController>();
+    final LoginPageController controller = Get.find<LoginPageController>();
     var currentIndex = _getIndexFromRoute(context);
 
     // Verifica se está na página "usuario"
@@ -62,12 +62,12 @@ class _BaseScreemState extends State<BaseScreem> {
             : const Size.fromHeight(140), // Altura padrão para BaseHeader
         child: isUsuarioPage
             ? BaseHeaderUsuario(
-                getImage: _controller.getImage,
-                getName: _controller.getName,
-                getEmail: _controller.getEmail)
+                getImage: controller.getImage,
+                getName: controller.getName,
+                getEmail: controller.getEmail)
             : BaseHeader(
-                getImage: _controller.getImage,
-                getName: _controller.getName,
+                getImage: controller.getImage,
+                getName: controller.getName,
               ),
       ),
       body: widget.body,

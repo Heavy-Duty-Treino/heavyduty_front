@@ -17,7 +17,7 @@ class _CardFrequenciaState extends State<CardFrequencia> {
 
   // Constantes e estilos
   static const _maxY = 10.0;
-  static const _cardColor = const Color.fromARGB(255, 0, 7, 44);
+  static const _cardColor = Color.fromARGB(255, 0, 7, 44);
   static const _textStyle = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.bold,
@@ -25,7 +25,7 @@ class _CardFrequenciaState extends State<CardFrequencia> {
   );
 
   // Gradiente para as barras
-  static final _barsGradient = LinearGradient(
+  static const _barsGradient = LinearGradient(
     colors: [Colors.cyan, Colors.cyanAccent],
     begin: Alignment.bottomCenter,
     end: Alignment.topCenter,
@@ -46,7 +46,7 @@ class _CardFrequenciaState extends State<CardFrequencia> {
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Stack(children: [
-            Text(
+            const Text(
               "Frequencia",
               style: TextStyle(
                 color: Colors.white,

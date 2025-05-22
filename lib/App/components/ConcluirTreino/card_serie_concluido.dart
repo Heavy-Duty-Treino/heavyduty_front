@@ -18,7 +18,7 @@ class _CardSerieConcluidoState extends State<CardSerieConcluido> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
             width: double.infinity,
             child: DataTable(
               columns: const [
@@ -75,7 +75,7 @@ class _CardSerieConcluidoState extends State<CardSerieConcluido> {
             onPressed: () {
               _controller.addSerie(widget.idExercicio);
             },
-            child: Text('Adicionar Serie'))
+            child: const Text('Adicionar Serie'))
       ],
     );
   }

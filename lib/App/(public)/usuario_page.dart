@@ -9,8 +9,8 @@ class UsuarioPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UsuarioController _controller = UsuarioController();
-    const _cardColor = const Color.fromARGB(255, 0, 7, 44);
+    final UsuarioController controller = UsuarioController();
+    const cardColor = Color.fromARGB(255, 0, 7, 44);
 
     return BaseScreem(
       title: 'Usuario',
@@ -19,7 +19,7 @@ class UsuarioPage extends StatelessWidget {
         children: [
           // Card: Editar Perfil
           Card(
-            color: _cardColor,
+            color: cardColor,
             child: ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
               title: const Text(
@@ -33,7 +33,7 @@ class UsuarioPage extends StatelessWidget {
           ),
           // Card: Alterar Senha
           Card(
-            color: _cardColor,
+            color: cardColor,
             child: ListTile(
               leading: const Icon(Icons.lock, color: Colors.orange),
               title: const Text(
@@ -47,7 +47,7 @@ class UsuarioPage extends StatelessWidget {
           ),
           // Card: Configurações do Aplicativo
           Card(
-            color: _cardColor,
+            color: cardColor,
             child: ListTile(
               leading: const Icon(Icons.settings, color: Colors.green),
               title: const Text(
@@ -61,7 +61,7 @@ class UsuarioPage extends StatelessWidget {
           ),
           // Card: Sair
           Card(
-            color: _cardColor,
+            color: cardColor,
             child: ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text(
@@ -70,7 +70,7 @@ class UsuarioPage extends StatelessWidget {
               ),
               onTap: () {
                 // Lógica para logout
-                _controller.Logout().then((_) {
+                controller.Logout().then((_) {
                   // Redireciona para a página de login após o logout
                   Routefly.navigate(routePaths.login);
                 });
