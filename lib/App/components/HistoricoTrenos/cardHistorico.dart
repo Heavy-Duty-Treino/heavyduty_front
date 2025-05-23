@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:heavyduty_front/App/components/HistoricoTrenos/cardExerciciosHistorico.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';
+import 'package:intl/intl.dart';
 
 class CardHistoricoPage extends StatelessWidget {
   final String title;
@@ -10,14 +11,22 @@ class CardHistoricoPage extends StatelessWidget {
   final int restTime;
   final List<Exercicio> exercices;
 
-  const CardHistoricoPage(
-      {super.key,
-      required this.title,
-      required this.data,
-      required this.nameUser,
-      required this.profileImage,
-      required this.restTime,
-      required this.exercices});
+  const CardHistoricoPage({
+    super.key,
+    required this.title,
+    required this.data,
+    required this.nameUser,
+    required this.profileImage,
+    required this.restTime,
+    required this.exercices,
+  });
+
+  String formatarData(String dataUtc) {
+    final DateTime dateTime = DateTime.parse(dataUtc).toLocal();
+    final DateFormat formatter =
+        DateFormat('dd-MM-yy'); // <-- 'yy' para dois dígitos
+    return formatter.format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,7 @@ class CardHistoricoPage extends StatelessWidget {
                   Text(nameUser),
                 ],
               ),
-              Text(data),
+              Text(formatarData(data)),
             ],
           ),
           Text(title),

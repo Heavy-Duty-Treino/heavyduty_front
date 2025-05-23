@@ -17,9 +17,8 @@ class HisoticoPage extends StatelessWidget {
             itemCount: controller.treinosConcluidos.length,
             itemBuilder: (contex, index) {
               final treinos = controller.treinosConcluidos[index];
-
               return CardHistoricoPage(
-                data: "data",
+                data: treinos.dataCriacao,
                 title: treinos.titulo,
                 nameUser: treinos.nomeUsuario,
                 profileImage: treinos.fotoPerfilUsuario,
