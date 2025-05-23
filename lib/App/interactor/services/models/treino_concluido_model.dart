@@ -7,14 +7,17 @@ class TreinoConcluido {
   String fotoPerfilUsuario;
   int duracao;
   List<Exercicio> exercicios;
+  String dataCriacao;
 
-  TreinoConcluido(
-      {required this.idTreino,
-      required this.titulo,
-      required this.nomeUsuario,
-      required this.fotoPerfilUsuario,
-      required this.exercicios,
-      required this.duracao});
+  TreinoConcluido({
+    required this.idTreino,
+    required this.titulo,
+    required this.nomeUsuario,
+    required this.fotoPerfilUsuario,
+    required this.exercicios,
+    required this.duracao,
+    required this.dataCriacao,
+  });
 
   factory TreinoConcluido.fromJson(Map<String, dynamic> json) {
     return TreinoConcluido(
@@ -23,6 +26,7 @@ class TreinoConcluido {
       nomeUsuario: json['nome_Usuario'],
       fotoPerfilUsuario: json['foto_Perfil_Usuario'],
       duracao: json['duracao'],
+      dataCriacao: json['dataCriacao'],
       exercicios: List<Exercicio>.from(
           json['exercicios'].map((x) => Exercicio.fromJson(x))),
     );
@@ -35,6 +39,7 @@ class TreinoConcluido {
       'nome_Usuario': nomeUsuario,
       'foto_Perfil_Usuario': fotoPerfilUsuario,
       'duracao': duracao,
+      'dataCriacao': dataCriacao,
       'exercicios': List<dynamic>.from(exercicios.map((x) => x.toJson())),
     };
   }

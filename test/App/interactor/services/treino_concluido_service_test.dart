@@ -5,6 +5,7 @@ void main() {
   test('get all treinos concluidos', () async {
     final service = TreinoConcluidoService();
     final treinosConcluidos = await service.getAll();
+    print(treinosConcluidos.first.dataCriacao);
     expect(treinosConcluidos.isNotEmpty, true);
   });
 }

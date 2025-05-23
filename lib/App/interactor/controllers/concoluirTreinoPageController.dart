@@ -90,7 +90,8 @@ class ConcoluirTreinoPageController extends GetxController {
         nomeUsuario: treino.value.nomeUsuario,
         fotoPerfilUsuario: treino.value.fotoPerfilUsuario,
         duracao: start.value,
-        exercicios: treino.value.exercicios);
+        exercicios: treino.value.exercicios,
+        dataCriacao: "");
     var response = await service.Create(treinoConcluido);
     if (response.statusCode == 200) {
       stopTimer();
