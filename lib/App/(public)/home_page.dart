@@ -4,6 +4,8 @@ import 'package:heavyduty_front/App/components/homepage/card_duracao.dart';
 import 'package:heavyduty_front/App/components/homepage/card_frequencia.dart';
 import 'package:heavyduty_front/App/components/homepage/card_historico.dart';
 import 'package:heavyduty_front/App/components/homepage/card_volume.dart';
+import 'package:heavyduty_front/routes.g.dart';
+import 'package:routefly/routefly.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -80,7 +82,10 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.only(left: 4),
                               child: SizedBox(
                                 height: cardHeight,
-                                child: const CardHistorico(),
+                                child: InkWell(
+                                    onTap: () =>
+                                        Routefly.navigate(routePaths.historico),
+                                    child: const CardHistorico()),
                               ),
                             ),
                           ),
