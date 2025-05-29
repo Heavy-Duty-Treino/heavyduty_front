@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_common/get_reset.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:heavyduty_front/App/interactor/services/exercicio_services.dart';
 import 'package:heavyduty_front/App/interactor/services/models/exercicio_model.dart';
 import 'package:heavyduty_front/App/interactor/services/models/treino_model.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:heavyduty_front/App/components/shared/base_screem.dart';
 import 'package:heavyduty_front/App/components/homepage/card_duracao.dart';
 import 'package:heavyduty_front/App/components/homepage/card_frequencia.dart';

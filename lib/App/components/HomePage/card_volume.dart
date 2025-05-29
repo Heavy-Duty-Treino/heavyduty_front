@@ -24,11 +24,11 @@ class _CardVolumeState extends State<CardVolume> {
   Widget build(BuildContext context) {
     return Card(
       color: const Color.fromARGB(255, 0, 7, 44),
-      child: Container(
+      child: SizedBox(
         height: 300,
         child: Obx(() {
           if (_controller.isLoading.value) {
-            return Column(
+            return const Column(
               children: [
                 Text(
                   "Volume",
@@ -42,8 +42,8 @@ class _CardVolumeState extends State<CardVolume> {
             );
           }
           return Stack(children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
               child: Text(
                 "Volume",
                 style: TextStyle(

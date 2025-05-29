@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Login")),
+        title: const Center(child: Text("Login")),
       ),
       body: _body(),
     );
@@ -28,10 +28,10 @@ class LoginPage extends StatelessWidget {
     return Center(
       child: ListView(
         shrinkWrap: true,
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         children: [
-          EmailField(),
-          passwordField(),
+          const EmailField(),
+          const passwordField(),
           BaseButton(
               title: "Entrar",
               ph: 48,
@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
             children: [
               TextSpan(
                 text: " Cadastre-se",
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.blue,
                   fontWeight: FontWeight.bold,
                 ),

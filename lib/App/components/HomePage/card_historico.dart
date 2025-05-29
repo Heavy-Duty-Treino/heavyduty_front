@@ -22,8 +22,8 @@ class _CardHistoricoState extends State<CardHistorico> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
+              const Padding(
+                padding: EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -48,14 +48,14 @@ class _CardHistoricoState extends State<CardHistorico> {
                       children: [
                         Text(
                           '${controller.trainCounts}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.normal,
                             color: Colors.white,
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        Text(
+                        const Text(
                           "Treinos registrados",
                           style: TextStyle(
                             fontSize: 18,

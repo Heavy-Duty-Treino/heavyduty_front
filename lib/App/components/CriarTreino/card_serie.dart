@@ -19,13 +19,13 @@ class _CardSerieState extends State<CardSerie> {
   List<TableRow> series = [
     TableRow(children: [
       Container(
-        child: Text('Serie'),
+        child: const Text('Serie'),
       ),
       Container(
-        child: Text('KG'),
+        child: const Text('KG'),
       ),
       Container(
-        child: Text('Repetições'),
+        child: const Text('Repetições'),
       )
     ]),
   ];
@@ -75,34 +75,34 @@ class _CardSerieState extends State<CardSerie> {
                 AppBar(
                   leading: null,
                   automaticallyImplyLeading: false,
-                  title: Center(child: Text('Selecione o tipo da Série')),
+                  title: const Center(child: Text('Selecione o tipo da Série')),
                 ),
                 ListTile(
-                    leading: new Icon(Icons.music_note),
-                    title: new Text('Série Aquecimento'),
+                    leading: const Icon(Icons.music_note),
+                    title: const Text('Série Aquecimento'),
                     onTap: () => {
                           controller.addSerieValue(widget.idExercicio, index,
                               'Aquecimento', null, null)
                         }),
                 ListTile(
-                  leading: new Icon(Icons.videocam),
-                  title: new Text('Série Normal'),
+                  leading: const Icon(Icons.videocam),
+                  title: const Text('Série Normal'),
                   onTap: () => {
                     controller.addSerieValue(widget.idExercicio, index,
                         serieValue.toString(), null, null)
                   },
                 ),
                 ListTile(
-                  leading: new Icon(Icons.satellite),
-                  title: new Text('Série Drop-Set'),
+                  leading: const Icon(Icons.satellite),
+                  title: const Text('Série Drop-Set'),
                   onTap: () => {
                     controller.addSerieValue(
                         widget.idExercicio, index, 'DropSet', null, null)
                   },
                 ),
                 ListTile(
-                  leading: new Icon(Icons.delete),
-                  title: new Text('Remover Série'),
+                  leading: const Icon(Icons.delete),
+                  title: const Text('Remover Série'),
                   onTap: () => {},
                 ),
               ],
@@ -118,7 +118,8 @@ class _CardSerieState extends State<CardSerie> {
         Table(
           children: series,
         ),
-        ElevatedButton(onPressed: AddSerie, child: Text('Adicionar Serie'))
+        ElevatedButton(
+            onPressed: AddSerie, child: const Text('Adicionar Serie'))
       ],
     );
   }

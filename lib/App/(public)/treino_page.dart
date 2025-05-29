@@ -26,9 +26,9 @@ class _TreinoPageState extends State<TreinoPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: const Text('Treinos'),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Text('Treinos'),
             ),
             Row(
               children: [

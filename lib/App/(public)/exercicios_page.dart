@@ -30,7 +30,7 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Escolha um exercicio'),
+        title: const Text('Escolha um exercicio'),
         actions: <Widget>[
           BaseButton(
               title: 'Adicionar Exercicios',

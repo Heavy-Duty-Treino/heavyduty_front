@@ -21,17 +21,17 @@ class _BaseButtonState extends State<BaseButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: Text(widget.title),
       style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 1, 12, 43),
+          backgroundColor: const Color.fromARGB(255, 1, 12, 43),
           foregroundColor: Colors.white,
           padding:
               EdgeInsets.symmetric(horizontal: widget.ph, vertical: widget.pv),
           elevation: 1,
-          side: BorderSide(color: Colors.white, width: 0.1),
-          shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.white, width: 0.1),
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)))),
       onPressed: widget.onPressed,
+      child: Text(widget.title),
     );
   }
 }

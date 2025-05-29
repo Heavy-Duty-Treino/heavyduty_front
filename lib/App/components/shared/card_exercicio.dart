@@ -39,7 +39,7 @@ class _CardExercicioState extends State<CardExercicio> {
           Row(children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(40),
-              child: Container(
+              child: SizedBox(
                 width: 50,
                 height: 50,
                 child: Image(image: NetworkImage(widget.image)),
@@ -47,7 +47,7 @@ class _CardExercicioState extends State<CardExercicio> {
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(widget.title),
-              Text('Tempo de descanso: 3 min')
+              const Text('Tempo de descanso: 3 min')
             ])
           ]),
           if (!widget.showColum)

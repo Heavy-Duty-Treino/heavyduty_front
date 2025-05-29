@@ -50,7 +50,7 @@ class ConcoluirTreinoPageController extends GetxController {
     var index =
         exercicios.indexWhere((exer) => exer.exercicioId == idExercicio);
     var nextSerie = (exercicios[index].series.length + 1).toString();
-    var newSerie = new Serie(tipoSerie: nextSerie, pesoKg: 0, repeticoes: 0);
+    var newSerie = Serie(tipoSerie: nextSerie, pesoKg: 0, repeticoes: 0);
 
     treino.value.exercicios[index].series.add(newSerie);
     treino.refresh();
@@ -90,7 +90,8 @@ class ConcoluirTreinoPageController extends GetxController {
         nomeUsuario: treino.value.nomeUsuario,
         fotoPerfilUsuario: treino.value.fotoPerfilUsuario,
         duracao: start.value,
-        exercicios: treino.value.exercicios);
+        exercicios: treino.value.exercicios,
+        dataCriacao: "");
     var response = await service.Create(treinoConcluido);
     if (response.statusCode == 200) {
       stopTimer();

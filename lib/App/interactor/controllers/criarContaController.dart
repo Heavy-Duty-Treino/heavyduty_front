@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:heavyduty_front/App/interactor/services/login_services.dart';
 import 'package:heavyduty_front/App/interactor/services/models/createUser_model.dart';
-import 'package:heavyduty_front/App/interactor/services/user_services.dart';
 import 'package:heavyduty_front/routes.g.dart';
 import 'package:routefly/routefly.dart';
 

@@ -21,7 +21,7 @@ class _CardTreinoState extends State<CardTreino> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromARGB(255, 43, 44, 46),
+      color: const Color.fromARGB(255, 43, 44, 46),
       child: SizedBox(
         height: 100,
         child: Column(
@@ -29,14 +29,14 @@ class _CardTreinoState extends State<CardTreino> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(widget.title),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: BaseButton(
                     title: 'Iniciar',
                     ph: 25,

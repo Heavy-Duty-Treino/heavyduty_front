@@ -42,11 +42,11 @@ class _CriarTreinoPageState extends State<CriarTreinoPage> {
         preferredSize: const Size.fromHeight(100),
         child: Container(
           color: Colors.black,
-          padding: EdgeInsets.only(top: 30),
+          padding: const EdgeInsets.only(top: 30),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text('Criar novo treino'),
             ),
             Row(
@@ -75,7 +75,8 @@ class _CriarTreinoPageState extends State<CriarTreinoPage> {
         children: [
           TextField(
             controller: _titleController,
-            decoration: InputDecoration(hintText: 'Digite o titulo do treino'),
+            decoration:
+                const InputDecoration(hintText: 'Digite o titulo do treino'),
           ),
           Expanded(
             child: Obx(() {
@@ -90,7 +91,7 @@ class _CriarTreinoPageState extends State<CriarTreinoPage> {
                       child: ElevatedButton(
                         onPressed:
                             AddExercicio, // Função para adicionar novo exercício
-                        child: Text('Adicionar um exercício'),
+                        child: const Text('Adicionar um exercício'),
                       ),
                     );
                   }
