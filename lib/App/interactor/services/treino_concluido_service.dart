@@ -7,8 +7,8 @@ class TreinoConcluidoService {
   final urlDefault = '${Sharedservices().url}/api/treinosconcluidos';
   final dio = Dio();
 
-  Future<List<TreinoConcluido>> getAll() async {
-    final response = await dio.get(urlDefault);
+  Future<List<TreinoConcluido>> getAll(String email) async {
+    final response = await dio.get("$urlDefault/$email");
     final data = response.data as List;
     List<TreinoConcluido> treinosConcluidos =
         data.map((json) => TreinoConcluido.fromJson(json)).toList();

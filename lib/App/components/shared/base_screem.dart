@@ -54,22 +54,45 @@ class _BaseScreemState extends State<BaseScreem> {
 
     // Verifica se está na página "usuario"
     final isUsuarioPage = ModalRoute.of(context)?.settings.name == '/usuario';
+    final isHistoricoPage =
+        ModalRoute.of(context)?.settings.name == '/historico';
+
+    PreferredSize header(String routeName) {
+      if (routeName == '/usuario') {
+        return PreferredSize(
+          preferredSize: const Size.fromHeight(200),
+          child: BaseHeaderUsuario(
+            getImage: controller.getImage,
+            getName: controller.getName,
+            getEmail: controller.getEmail,
+          ),
+        );
+      } else if (routeName == '/historico') {
+        return PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight),
+          child: AppBar(
+            backgroundColor: Colors.black,
+            leading: BackButton(
+              color: Colors.white,
+              onPressed: () => Routefly.navigate(routePaths.home),
+            ),
+            title: const Text('Histórico'),
+            centerTitle: true,
+          ),
+        );
+      } else {
+        return PreferredSize(
+          preferredSize: const Size.fromHeight(140),
+          child: BaseHeader(
+            getImage: controller.getImage,
+            getName: controller.getName,
+          ),
+        );
+      }
+    }
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: isUsuarioPage
-            ? const Size.fromHeight(200) // Altura maior para BaseHeaderUsuario
-            : const Size.fromHeight(140), // Altura padrão para BaseHeader
-        child: isUsuarioPage
-            ? BaseHeaderUsuario(
-                getImage: controller.getImage,
-                getName: controller.getName,
-                getEmail: controller.getEmail)
-            : BaseHeader(
-                getImage: controller.getImage,
-                getName: controller.getName,
-              ),
-      ),
+      appBar: header(ModalRoute.of(context)?.settings.name ?? ''),
       body: widget.body,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
