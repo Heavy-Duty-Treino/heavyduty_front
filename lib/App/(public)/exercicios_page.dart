@@ -42,29 +42,41 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
         ],
       ),
       body: Obx(() {
-        return ListView.builder(
-            itemCount: exercicioController.exercicios
-                .where((ex) => ex.musculo_alvo.contains(filtro))
-                .toList()
-                .length,
-            itemBuilder: (contex, index) {
-              final exerciciosFiltrados = exercicioController.exercicios
-                  .where((ex) => ex.musculo_alvo.contains(filtro))
-                  .toList();
-              final exercicio = exerciciosFiltrados[index];
-              return InkWell(
-                onTap: () {
-                  exercicios.add(exercicio);
-                },
-                child: CardExercicio(
-                  title: exercicio.nome_exercicio,
-                  showColum: true,
-                  isPageConcluir: false,
-                  idExercicio: exercicio.id,
-                  image: exercicio.image_Url,
-                ),
-              );
-            });
+        final exerciciosFiltrados = exercicioController.exercicios
+            .where((ex) => ex.musculo_alvo.contains(filtro))
+            .toList();
+
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    filtro = 'Costas';
+                  },
+                  child: const Text('Filtrar Exercicio')),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: exerciciosFiltrados.length,
+                  itemBuilder: (contex, index) {
+                    final exercicio = exerciciosFiltrados[index];
+                    return InkWell(
+                      onTap: () {
+                        exercicios.add(exercicio);
+                      },
+                      child: CardExercicio(
+                        title: exercicio.nome_exercicio,
+                        showColum: true,
+                        isPageConcluir: false,
+                        idExercicio: exercicio.id,
+                        image: exercicio.image_Url,
+                      ),
+                    );
+                  }),
+            )
+          ],
+        );
       }),
     );
   }
