@@ -24,6 +24,8 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
     Routefly.pop(context, result: exercicios);
   }
 
+  String filtro = 'Costas';
+
   @override
   Widget build(BuildContext context) {
     exercicioController.getAllExercicios();
@@ -41,9 +43,15 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
       ),
       body: Obx(() {
         return ListView.builder(
-            itemCount: exercicioController.exercicios.length,
+            itemCount: exercicioController.exercicios
+                .where((ex) => ex.musculo_alvo.contains(filtro))
+                .toList()
+                .length,
             itemBuilder: (contex, index) {
-              final exercicio = exercicioController.exercicios[index];
+              final exerciciosFiltrados = exercicioController.exercicios
+                  .where((ex) => ex.musculo_alvo.contains(filtro))
+                  .toList();
+              final exercicio = exerciciosFiltrados[index];
               return InkWell(
                 onTap: () {
                   exercicios.add(exercicio);
