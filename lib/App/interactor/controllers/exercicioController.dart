@@ -7,6 +7,7 @@ class Exerciciocontroller extends GetxController {
   var service = ExercicioServices();
   var exercicios = <ExercicioModel>[].obs;
   var selectedExercicios = <Exercicio>[].obs;
+  var filtro = ''.obs;
 
   Future<void> getAllExercicios() async {
     var result = await service.getAll();
