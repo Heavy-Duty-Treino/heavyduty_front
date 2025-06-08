@@ -12,6 +12,7 @@ import 'app/(public)/login_page.dart' as a6;
 import 'app/(public)/splash_page.dart' as a7;
 import 'app/(public)/treino_page.dart' as a8;
 import 'app/(public)/usuario_page.dart' as a9;
+import 'app/(public)/volume_page.dart' as a10;
 
 List<RouteEntity> get routes => [
       RouteEntity(
@@ -104,6 +105,15 @@ List<RouteEntity> get routes => [
           const a9.UsuarioPage(),
         ),
       ),
+      RouteEntity(
+        key: '/volume',
+        uri: Uri.parse('/volume'),
+        routeBuilder: (ctx, settings) => Routefly.defaultRouteBuilder(
+          ctx,
+          settings,
+          const a10.VolumePage(),
+        ),
+      ),
     ];
 
 const routePaths = (
@@ -118,4 +128,5 @@ const routePaths = (
   splash: '/splash',
   treino: '/treino',
   usuario: '/usuario',
+  volume: '/volume',
 );
