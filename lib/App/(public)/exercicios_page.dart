@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:heavyduty_front/App/components/Exercicios/modal_button_exercicios.dart';
+import 'package:heavyduty_front/App/components/ExercicioPage/ModalButtonExercicios.dart';
 import 'package:heavyduty_front/App/components/shared/base_button.dart';
 import 'package:heavyduty_front/App/components/shared/card_exercicio.dart';
 import 'package:heavyduty_front/App/interactor/controllers/criarTreinoPageController.dart';
@@ -25,8 +25,6 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
     Routefly.pop(context, result: exercicios);
   }
 
-  String filtro = 'Costas';
-
   @override
   Widget build(BuildContext context) {
     exercicioController.getAllExercicios();
@@ -44,14 +42,17 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
       ),
       body: Obx(() {
         final exerciciosFiltrados = exercicioController.exercicios
-            .where((ex) => ex.musculo_alvo.contains(filtro))
+            .where((ex) =>
+                ex.musculo_alvo.contains(exercicioController.filtro.value))
             .toList();
 
         return Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ModalButtonExercicios(),
+              child: ModalButtonExercicios(
+                controller: exercicioController,
+              ),
             ),
             Expanded(
               child: ListView.builder(
