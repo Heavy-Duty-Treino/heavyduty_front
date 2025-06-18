@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:heavyduty_front/App/components/Exercicios/modal_button_exercicios.dart';
 import 'package:heavyduty_front/App/components/shared/base_button.dart';
 import 'package:heavyduty_front/App/components/shared/card_exercicio.dart';
 import 'package:heavyduty_front/App/interactor/controllers/criarTreinoPageController.dart';
@@ -50,11 +51,7 @@ class _ExerciciosPageState extends State<ExerciciosPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                  onPressed: () {
-                    filtro = 'Costas';
-                  },
-                  child: const Text('Filtrar Exercicio')),
+              child: ModalButtonExercicios(),
             ),
             Expanded(
               child: ListView.builder(
