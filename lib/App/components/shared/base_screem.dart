@@ -67,7 +67,7 @@ class _BaseScreemState extends State<BaseScreem> {
             getEmail: controller.getEmail,
           ),
         );
-      } else if (routeName == '/historico') {
+      } else if (routeName == '/historico' || routeName == '/volume') {
         return PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: AppBar(
@@ -76,7 +76,15 @@ class _BaseScreemState extends State<BaseScreem> {
               color: Colors.white,
               onPressed: () => Routefly.navigate(routePaths.home),
             ),
-            title: const Text('Histórico'),
+            title: routeName == '/historico'
+                ? const Text(
+                    'Histórico',
+                    style: TextStyle(color: Colors.white),
+                  )
+                : const Text(
+                    'Volume',
+                    style: TextStyle(color: Colors.white),
+                  ),
             centerTitle: true,
           ),
         );
