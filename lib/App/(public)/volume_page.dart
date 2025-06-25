@@ -16,6 +16,7 @@ class VolumePage extends StatelessWidget {
     'Ombros': 8,
     'Bíceps': 6,
     'Tríceps': 5,
+    'Posterior': 4
   };
 
   final List<Color> cores = const [
@@ -25,21 +26,13 @@ class VolumePage extends StatelessWidget {
     Colors.amber,
     Colors.purple,
     Colors.red,
+    Colors.cyan,
   ];
 
   @override
   Widget build(BuildContext context) {
     final VolumePageController _controller =
         Get.put<VolumePageController>(VolumePageController());
-
-    final Map<String, RxInt> exerciciosPorGrupo = {
-      'Peito': _controller.peito,
-      'Costas': _controller.costas,
-      'Quadriceps': _controller.pernas,
-      'Ombros': _controller.ombros,
-      'Bíceps': _controller.biceps,
-      'Tríceps': _controller.triceps,
-    };
 
     return BaseScreem(
       title: 'Volume Page',
@@ -126,7 +119,7 @@ class VolumePage extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Muscugrup',
+                Text('Grupos Musculares',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.white)),
                 Text('Exercicios',
@@ -134,22 +127,32 @@ class VolumePage extends StatelessWidget {
                         fontWeight: FontWeight.bold, color: Colors.white)),
               ],
             ),
-            const Divider(color: Colors.grey),
-            ...exerciciosPorGrupo.entries.map(
-              (entry) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(entry.key,
-                        style: const TextStyle(color: Colors.white)),
-                    Obx(() => Text(entry.value.toString(),
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold))),
-                  ],
-                ),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(8),
+                children: [
+                  const Divider(color: Colors.grey),
+                  ..._controller.gruposMusculares.entries.map(
+                    (entry) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(entry.key,
+                              style: const TextStyle(color: Colors.white)),
+                          Obx(() => Text(
+                                entry.value.toString(),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
       ),
