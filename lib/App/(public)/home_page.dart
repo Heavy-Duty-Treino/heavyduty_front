@@ -50,7 +50,10 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.only(right: 4),
                               child: SizedBox(
                                 height: cardHeight,
-                                child: const CardVolume(),
+                                child: InkWell(
+                                    onTap: () =>
+                                        Routefly.navigate(routePaths.volume),
+                                    child: const CardVolume()),
                               ),
                             ),
                           ),
